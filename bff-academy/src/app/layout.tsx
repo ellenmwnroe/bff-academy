@@ -1,16 +1,15 @@
-import { Bevan, Poppins } from "next/font/google";
+import { Paytone_One, Nunito } from "next/font/google";
 import "./globals.css";
 
-const bevan = Bevan({
-  weight: "400",
+const paytone = Paytone_One({
+  weight: "400", 
   subsets: ["latin"],
-  variable: "--font-bevan",
+  variable: "--font-paytone",
 });
 
-const poppins = Poppins({
-  weight: ["400", "500", "700", "800", "900"],
+const nunito = Nunito({
   subsets: ["latin"],
-  variable: "--font-poppins",
+  variable: "--font-nunito",
 });
 
 export default function RootLayout({
@@ -20,7 +19,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR">
-      <body className={`${poppins.variable} ${bevan.variable} font-sans antialiased`}>
+      <body className={`${nunito.variable} ${paytone.variable} font-sans antialiased`}>
         {children}
       </body>
     </html>
