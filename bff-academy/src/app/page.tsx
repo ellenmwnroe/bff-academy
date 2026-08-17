@@ -1,11 +1,27 @@
-"use client"; // <-- Essa é a palavra mágica!
+"use client"
 
-import { HomeView } from "../components/home-view"; 
+import { useState, useEffect } from "react"
+import { SplashScreen } from "../components/splash-screen"
+import { LoginScreen } from "../components/login-screen"
 
-export default function HomeTestPage() {
-  return (
-    <main className="min-h-screen bg-varden text-cosmos">
-      <HomeView onStartPractice={() => alert("O botão funciona!")} />
-    </main>
-  );
+export default function Page() {
+  const [showSplash, setShowSplash] = useState(true)
+
+  useEffect(() => {
+    const hasSeenSplash = sessionStorage.getItem("hasSeenSplash")
+    if (hasSeenSplash) {
+      setShowSplash(false)
+    }
+  }, [])
+
+  const handleSplashComplete = () => {
+    sessionStorage.setItem("hasSeenSplash", "true")
+    setShowSplash(false)
+  }
+
+  if (showSplash) {
+    return <SplashScreen onComplete={handleSplashComplete} />
+  }
+
+  return <LoginScreen />
 }

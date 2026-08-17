@@ -1,6 +1,7 @@
 "use client"
 
 import Image from "next/image"
+import { useRouter } from "next/navigation"
 import { Flame, ArrowRight, Sparkles, Zap, Star, MessageCircle, Mic, BookOpen, Trophy, Clock } from "lucide-react"
 import { useState } from "react"
 
@@ -160,7 +161,9 @@ function CircularProgress({
   )
 }
 
-export function HomeView({ onStartPractice }: { readonly onStartPractice: () => void }) {
+export function HomeView() {
+  const router = useRouter()
+
   return (
     <div className="flex flex-col gap-6 px-5 pb-8 pt-5">
       {/* Header */}
@@ -234,7 +237,7 @@ export function HomeView({ onStartPractice }: { readonly onStartPractice: () => 
             <div className="flex items-end">
               <button
                 type="button"
-                onClick={onStartPractice}
+                onClick={() => router.push("/lesson-overview")}
                 className="group relative rounded-2xl border-[3px] border-cosmos bg-card p-1 shadow-[4px_4px_0_0_var(--color-cosmos)] transition-all active:translate-x-0.5 active:translate-y-0.5 active:shadow-[2px_2px_0_0_var(--color-cosmos)]"
               >
                 <div className="flex items-center justify-center gap-2 rounded-xl border-2 border-gochujang border-b-[5px] bg-crimson px-6 py-4 text-base font-extrabold text-varden transition-all group-active:translate-y-0.5 group-active:border-b-2">

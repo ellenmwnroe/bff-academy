@@ -17,7 +17,7 @@ export function BffAcademy() {
           {tab === "practice" ? (
             <PracticeView onClose={() => setTab("home")} />
           ) : (
-            <HomeView onStartPractice={() => setTab("practice")} />
+            <HomeView />
           )}
         </main>
 
