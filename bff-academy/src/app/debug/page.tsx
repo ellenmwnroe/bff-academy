@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { Home, BookOpen, Play, Sparkles, PenTool } from "lucide-react"
+import { Home, BookOpen, Play, Sparkles, PenTool, Type } from "lucide-react"
 
 export default function DebugMenu() {
   return (
@@ -56,8 +56,19 @@ export default function DebugMenu() {
         >
           <PenTool className="size-6" />
           <div className="flex-1 text-left">
-            <div>Exercício (Múltipla Escolha)</div>
-            <div className="text-xs font-normal text-cosmos/70">Tela de exercício</div>
+            <div>Múltipla Escolha</div>
+            <div className="text-xs font-normal text-cosmos/70">Exercício de alternativas</div>
+          </div>
+        </Link>
+
+        <Link
+          href="/fill-blank"
+          className="flex items-center gap-3 rounded-2xl border-[3px] border-cosmos bg-card px-6 py-4 font-bold text-cosmos shadow-[4px_4px_0_0_var(--color-cosmos)] transition-all hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[2px_2px_0_0_var(--color-cosmos)]"
+        >
+          <Type className="size-6" />
+          <div className="flex-1 text-left">
+            <div>Preencher Lacunas</div>
+            <div className="text-xs font-normal text-cosmos/70">Exercício de digitação</div>
           </div>
         </Link>
       </div>
