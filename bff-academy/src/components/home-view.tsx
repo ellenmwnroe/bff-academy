@@ -2,9 +2,10 @@
 
 import Image from "next/image"
 import { useRouter } from "next/navigation"
-import { ArrowRight, Sparkles, Zap, Star, MessageCircle, Mic, BookOpen, Trophy, Clock } from "lucide-react"
+import { Star, Mic, BookOpen, Trophy, Clock } from "lucide-react"
 import { useState } from "react"
 import { GlobalHeader } from "./global-header"
+import { JourneyHeroCard } from "./journey-hero-card"
 
 type PaletteVariant = "crimson" | "marble" | "varden"
 
@@ -186,59 +187,18 @@ export function HomeView() {
 
       {/* Bento Grid Layout */}
       <div className="grid gap-4 md:grid-cols-2">
-        {/* Hero lesson card - Compacto */}
-        <section
-          aria-labelledby="lesson-heading"
-          className="relative overflow-hidden rounded-[32px] border-[3px] border-cosmos bg-marble p-6 shadow-[6px_6px_0_0_var(--color-cosmos)] md:col-span-2"
-        >
-          {/* Floating pill tag */}
-          <span className="absolute left-4 top-4 flex w-fit items-center gap-1.5 rounded-full border-2 border-cosmos bg-varden px-3 py-1.5 text-xs font-bold uppercase tracking-wide text-cosmos shadow-[3px_3px_0_0_var(--color-cosmos)]">
-            <Sparkles className="size-3.5" aria-hidden="true" />
-            Jornada de hoje
-          </span>
-
-          {/* floating decorations */}
-          <Star
-            className="animate-bob absolute right-6 top-6 size-8 fill-crimson text-cosmos"
-            style={{ ["--bob-rot" as string]: "-12deg" }}
-            aria-hidden="true"
+        {/* Hero lesson card */}
+        <div className="md:col-span-2">
+          <JourneyHeroCard
+            unitNumber={1}
+            title="Daily Routine & Horários"
+            description="Continue de onde parou e mantenha sua sequência viva!"
+            currentLesson={3}
+            totalLessons={5}
+            progressPercentage={60}
+            onContinueClick={() => router.push("/lesson-overview")}
           />
-          <Zap
-            className="animate-bob absolute bottom-8 right-8 size-7 fill-varden text-cosmos"
-            style={{ ["--bob-rot" as string]: "10deg", animationDelay: "0.6s" }}
-            aria-hidden="true"
-          />
-          <MessageCircle
-            className="animate-bob absolute left-6 bottom-6 size-7 fill-cosmos text-varden"
-            style={{ animationDelay: "1.1s" }}
-            aria-hidden="true"
-          />
-
-          <div className="relative mt-14 grid gap-6 md:grid-cols-[1fr_auto]">
-            <div className="flex flex-col gap-2">
-              <h2 id="lesson-heading" className="font-serif text-3xl text-cosmos text-balance">
-                Lição 1: Daily Routine
-              </h2>
-              <p className="text-sm font-medium leading-relaxed text-cosmos/80">
-                Continue de onde parou e mantenha sua sequência viva!
-              </p>
-            </div>
-
-            {/* Botão com fundo branco separado */}
-            <div className="flex items-end">
-              <button
-                type="button"
-                onClick={() => router.push("/lesson-overview")}
-                className="group relative rounded-2xl border-[3px] border-cosmos bg-card p-1 shadow-[4px_4px_0_0_var(--color-cosmos)] transition-all active:translate-x-0.5 active:translate-y-0.5 active:shadow-[2px_2px_0_0_var(--color-cosmos)]"
-              >
-                <div className="flex items-center justify-center gap-2 rounded-xl border-2 border-gochujang border-b-[5px] bg-crimson px-6 py-4 text-base font-extrabold text-varden transition-all group-active:translate-y-0.5 group-active:border-b-2">
-                  Continuar Jornada
-                  <ArrowRight className="size-5" strokeWidth={3} aria-hidden="true" />
-                </div>
-              </button>
-            </div>
-          </div>
-        </section>
+        </div>
 
         {/* Daily quests - Grid compacto */}
         <section aria-labelledby="quests-heading" className="flex flex-col gap-4 md:col-span-2">
