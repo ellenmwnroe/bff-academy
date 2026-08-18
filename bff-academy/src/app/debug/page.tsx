@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { Home, BookOpen, Play, Sparkles, PenTool, Type, Mic2 } from "lucide-react"
+import { Home, BookOpen, Play, Sparkles, PenTool, Type, Mic2, Trophy } from "lucide-react"
 
 export default function DebugMenu() {
   return (
@@ -80,6 +80,17 @@ export default function DebugMenu() {
           <div className="flex-1 text-left">
             <div>Speaking/Listening</div>
             <div className="text-xs font-normal text-varden/90">Exercício de pronúncia com IA</div>
+          </div>
+        </Link>
+
+        <Link
+          href="/lesson-completed"
+          className="flex items-center gap-3 rounded-2xl border-[3px] border-cosmos bg-marble px-6 py-4 font-bold text-varden shadow-[4px_4px_0_0_var(--color-cosmos)] transition-all hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[2px_2px_0_0_var(--color-cosmos)]"
+        >
+          <Trophy className="size-6 fill-varden" />
+          <div className="flex-1 text-left">
+            <div>Aula Concluída</div>
+            <div className="text-xs font-normal text-varden/90">Tela de vitória e recompensas</div>
           </div>
         </Link>
       </div>
