@@ -2,8 +2,9 @@
 
 import Image from "next/image"
 import { useRouter } from "next/navigation"
-import { Flame, ArrowRight, Sparkles, Zap, Star, MessageCircle, Mic, BookOpen, Trophy, Clock } from "lucide-react"
+import { ArrowRight, Sparkles, Zap, Star, MessageCircle, Mic, BookOpen, Trophy, Clock } from "lucide-react"
 import { useState } from "react"
+import { GlobalHeader } from "./global-header"
 
 type PaletteVariant = "crimson" | "marble" | "varden"
 
@@ -165,28 +166,18 @@ export function HomeView() {
   const router = useRouter()
 
   return (
-    <div className="flex flex-col gap-6 px-5 pb-8 pt-5">
-      {/* Header */}
-      <header className="flex items-center justify-between gap-3">
-        <div className="flex items-center gap-2.5">
-          <div className="size-10 rounded-xl border-2 border-cosmos bg-marble shadow-[2px_2px_0_0_var(--color-cosmos)] grid place-items-center">
-            <span className="font-serif text-xs font-bold text-cosmos">BFF</span>
-          </div>
-          <div className="relative">
-            <AvatarWithFallback src="/mascot.png" alt="Avatar da Ellen" initials="EL" size={48} />
-            <span className="absolute -bottom-1 -right-1 grid size-5 place-items-center rounded-full border-2 border-card bg-crimson text-[10px] font-bold text-varden shadow-[1px_1px_0_0_var(--color-gochujang)]">
-              5
-            </span>
-          </div>
-        </div>
+    <div className="flex flex-col gap-6 pb-8">
+      {/* Global Header */}
+      <GlobalHeader
+        streakCount={12}
+        livesCount={5}
+        avatarUrl="/mascot.png"
+        onAvatarClick={() => console.log("Avatar clicked - perfil modal")}
+        onStreakClick={() => console.log("Streak clicked - histórico modal")}
+        onLivesClick={() => console.log("Lives clicked - loja modal")}
+      />
 
-        {/* Glowing streak badge */}
-        <div className="flex items-center gap-1.5 rounded-full border-[3px] border-gochujang bg-crimson px-4 py-2 shadow-[3px_3px_0_0_var(--color-gochujang)]">
-          <Flame className="size-5 fill-varden text-varden" aria-hidden="true" />
-          <span className="font-serif text-xl leading-none text-varden">12</span>
-          <span className="sr-only">dias de sequência</span>
-        </div>
-      </header>
+      <div className="px-5 flex flex-col gap-6">
 
       {/* Greeting */}
       <h1 className="font-serif text-3xl leading-tight text-cosmos text-balance">
@@ -322,6 +313,7 @@ export function HomeView() {
             })}
           </div>
         </section>
+      </div>
       </div>
     </div>
   )
