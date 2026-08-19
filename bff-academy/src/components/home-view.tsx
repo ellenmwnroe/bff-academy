@@ -1,20 +1,26 @@
 "use client"
 
+import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { GlobalHeader } from "./global-header"
 import { JourneyHeroCard } from "./journey-hero-card"
 import { DailyMissionsCard } from "./daily-missions-card"
 import { UpcomingClassesCarousel } from "./upcoming-classes-carousel"
+import { StreakWarningModal } from "./streak-warning-modal"
+
+const STREAK_DAYS = 12
 
 export function HomeView() {
   const router = useRouter()
+  const [isStreakWarningOpen, setIsStreakWarningOpen] = useState(true)
 
   return (
     <div className="flex flex-col gap-6 pb-8">
       <GlobalHeader
-        streakCount={12}
+        streakCount={STREAK_DAYS}
         ticketsCount={2}
         avatarUrl="/mascot.png"
+        onStreakClick={() => setIsStreakWarningOpen(true)}
       />
 
       <div className="flex flex-col gap-6 px-5">
@@ -37,6 +43,16 @@ export function HomeView() {
 
       {/* Fora do padding lateral para o carrossel sangrar até a borda da tela */}
       <UpcomingClassesCarousel />
+
+      <StreakWarningModal
+        isOpen={isStreakWarningOpen}
+        streakDays={STREAK_DAYS}
+        onClose={() => setIsStreakWarningOpen(false)}
+        onSaveStreak={() => {
+          setIsStreakWarningOpen(false)
+          router.push("/lesson-overview")
+        }}
+      />
     </div>
   )
 }

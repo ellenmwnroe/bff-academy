@@ -18,7 +18,7 @@ export function SplashScreen({ onComplete }: { readonly onComplete: () => void }
     >
       {/* Logo Container com efeito Bento Box */}
       <motion.div
-        className="relative rounded-[32px] border-[4px] border-cosmos bg-card p-8 shadow-[8px_8px_0_0_var(--color-cosmos)]"
+        className="relative rounded-4xl border-4 border-cosmos bg-card p-8 shadow-[8px_8px_0_0_var(--color-cosmos)]"
         initial={{ scale: 0, rotate: -180 }}
         animate={{ scale: 1, rotate: 0 }}
         transition={{
