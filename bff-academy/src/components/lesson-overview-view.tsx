@@ -66,7 +66,7 @@ export function LessonOverviewView({
       {/* Main Content */}
       <main className="flex-1 space-y-6 px-5 pb-32 pt-4">
         {/* Hero Card - Lesson Title & Description */}
-        <section className="rounded-[32px] border-[3px] border-cosmos bg-card p-6 shadow-[6px_6px_0_0_var(--color-cosmos)]">
+        <section className="rounded-4xl border-[3px] border-cosmos bg-card p-6 shadow-[6px_6px_0_0_var(--color-cosmos)]">
           <div className="space-y-4">
             <h1 className="font-serif text-4xl leading-tight text-cosmos text-balance">
               Daily Routine & Horários
@@ -162,7 +162,7 @@ export function LessonOverviewView({
       </main>
 
       {/* Sticky Bottom Action Button */}
-      <div className="fixed bottom-0 left-0 right-0 bg-gradient-to-t from-varden via-varden to-transparent px-5 pb-6 pt-8">
+      <div className="fixed bottom-0 left-0 right-0 bg-linear-to-t from-varden via-varden to-transparent px-5 pb-6 pt-8">
         <button
           type="button"
           onClick={onStartExercise}

@@ -8,12 +8,8 @@ export default function LessonOverviewPage() {
 
   return (
     <LessonOverviewView
-      onStartExercise={() => {
-        // Navegar para a rota de exercícios quando implementada
-        // router.push('/lesson/practice')
-        alert("Começando a lição! (Navegação será implementada)")
-      }}
-      onBack={() => router.back()}
+      onStartExercise={() => router.push("/exercise")}
+      onBack={() => router.push("/home")}
     />
   )
 }

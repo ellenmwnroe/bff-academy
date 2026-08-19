@@ -1,8 +1,11 @@
 "use client"
 
+import { useRouter } from "next/navigation"
 import { FillInTheBlankView } from "../../components/exercises/fill-in-the-blank-view"
 
 export default function FillInTheBlankPage() {
+  const router = useRouter()
+
   const sampleExercise = {
     sentence: "I usually ___ up early at 7 AM.",
     blankPosition: 10,
@@ -18,8 +21,8 @@ export default function FillInTheBlankPage() {
       wordBank={sampleExercise.wordBank}
       progress={60}
       lives={4}
-      onClose={() => window.history.back()}
-      onContinue={() => alert("Próximo exercício! (Será implementado)")}
+      onClose={() => router.push("/home")}
+      onContinue={() => router.push("/speaking")}
     />
   )
 }

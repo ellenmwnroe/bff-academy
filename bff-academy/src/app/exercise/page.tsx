@@ -1,8 +1,11 @@
 "use client"
 
+import { useRouter } from "next/navigation"
 import { MultipleChoiceView } from "../../components/exercises/multiple-choice-view"
 
 export default function ExercisePage() {
+  const router = useRouter()
+
   const sampleQuestion = {
     question: "O que significa 'Daily Routine'?",
     answers: [
@@ -23,8 +26,8 @@ export default function ExercisePage() {
       audioUrl={sampleQuestion.audioUrl}
       progress={40}
       lives={5}
-      onClose={() => window.history.back()}
-      onContinue={() => alert("Próximo exercício! (Será implementado)")}
+      onClose={() => router.push("/home")}
+      onContinue={() => router.push("/fill-blank")}
     />
   )
 }

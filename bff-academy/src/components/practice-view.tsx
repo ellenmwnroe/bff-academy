@@ -55,7 +55,7 @@ export function PracticeView({ onClose }: { readonly onClose: () => void }) {
           <button
             type="button"
             aria-label="Segure para gravar"
-            className="relative grid size-24 place-items-center rounded-full border-[3px] border-gochujang border-b-[8px] bg-crimson text-varden transition-all active:translate-y-1 active:border-b-[3px]"
+            className="relative grid size-24 place-items-center rounded-full border-[3px] border-gochujang border-b-8 bg-crimson text-varden transition-all active:translate-y-1 active:border-b-[3px]"
           >
             <Mic className="size-10" strokeWidth={2.75} aria-hidden="true" />
           </button>

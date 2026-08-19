@@ -3,8 +3,14 @@
 import Image from "next/image"
 import { motion } from "framer-motion"
 import { Sparkles } from "lucide-react"
+import { useEffect } from "react"
 
 export function SplashScreen({ onComplete }: { readonly onComplete: () => void }) {
+  useEffect(() => {
+    const timer = setTimeout(onComplete, 2500)
+    return () => clearTimeout(timer)
+  }, [onComplete])
+
   return (
     <motion.div
       className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-varden"
@@ -12,9 +18,6 @@ export function SplashScreen({ onComplete }: { readonly onComplete: () => void }
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.3 }}
-      onAnimationComplete={() => {
-        setTimeout(onComplete, 2000)
-      }}
     >
       {/* Logo Container com efeito Bento Box */}
       <motion.div
