@@ -2,8 +2,6 @@
 
 import { Award, Flame, Star, Zap, Mic, Target, Lock, type LucideIcon } from "lucide-react"
 
-type AchievementAccent = "varden" | "gochujang" | "crimson" | "marble"
-
 type Achievement = {
   readonly id: string
   readonly title: string
@@ -11,7 +9,7 @@ type Achievement = {
   readonly total: number
   readonly unlocked: boolean
   readonly icon: LucideIcon
-  readonly accent: AchievementAccent
+  readonly circleColor: string
 }
 
 const mockAchievements: ReadonlyArray<Achievement> = [
@@ -22,7 +20,7 @@ const mockAchievements: ReadonlyArray<Achievement> = [
     total: 7,
     unlocked: true,
     icon: Flame,
-    accent: "gochujang",
+    circleColor: "bg-[#BE1622]",
   },
   {
     id: "xp-500",
@@ -31,7 +29,7 @@ const mockAchievements: ReadonlyArray<Achievement> = [
     total: 500,
     unlocked: true,
     icon: Zap,
-    accent: "crimson",
+    circleColor: "bg-[#5F9EA0]",
   },
   {
     id: "perfect-lesson",
@@ -40,7 +38,7 @@ const mockAchievements: ReadonlyArray<Achievement> = [
     total: 1,
     unlocked: true,
     icon: Star,
-    accent: "varden",
+    circleColor: "bg-yellow-500",
   },
   {
     id: "speaking-10",
@@ -49,7 +47,7 @@ const mockAchievements: ReadonlyArray<Achievement> = [
     total: 10,
     unlocked: false,
     icon: Mic,
-    accent: "marble",
+    circleColor: "bg-gray-200",
   },
   {
     id: "accuracy-streak",
@@ -58,7 +56,7 @@ const mockAchievements: ReadonlyArray<Achievement> = [
     total: 7,
     unlocked: false,
     icon: Target,
-    accent: "marble",
+    circleColor: "bg-gray-200",
   },
   {
     id: "daily-hero",
@@ -67,28 +65,9 @@ const mockAchievements: ReadonlyArray<Achievement> = [
     total: 30,
     unlocked: false,
     icon: Award,
-    accent: "marble",
+    circleColor: "bg-gray-200",
   },
 ]
-
-const accentStyles: Record<AchievementAccent, { circle: string; icon: string }> = {
-  varden: {
-    circle: "border-cosmos bg-varden",
-    icon: "text-cosmos",
-  },
-  gochujang: {
-    circle: "border-cosmos bg-gochujang",
-    icon: "text-varden",
-  },
-  crimson: {
-    circle: "border-gochujang bg-crimson",
-    icon: "text-varden",
-  },
-  marble: {
-    circle: "border-cosmos bg-marble",
-    icon: "text-cosmos",
-  },
-}
 
 type AchievementsViewProps = {
   readonly achievements?: ReadonlyArray<Achievement>
@@ -101,10 +80,10 @@ export function AchievementsView({
     <section aria-labelledby="achievements-title">
       {/* Header */}
       <header className="mb-4 flex items-center gap-3">
-        <div className="grid size-10 place-items-center rounded-xl border-2 border-cosmos bg-crimson">
-          <Award className="size-5 fill-varden text-varden" strokeWidth={2.5} aria-hidden="true" />
+        <div className="grid size-10 place-items-center rounded-xl border-[3px] border-[#083344] bg-[#BE1622] shadow-[2px_2px_0_0_#083344]">
+          <Award className="size-5 text-white" strokeWidth={2.5} aria-hidden="true" />
         </div>
-        <h2 id="achievements-title" className="font-serif text-lg font-black text-cosmos">
+        <h2 id="achievements-title" className="text-xl font-black text-[#083344]">
           Minhas Conquistas
         </h2>
       </header>
@@ -113,7 +92,6 @@ export function AchievementsView({
       <ul className="grid grid-cols-2 gap-4">
         {achievements.map((achievement) => {
           const Icon = achievement.unlocked ? achievement.icon : Lock
-          const styles = accentStyles[achievement.accent]
           const progressLabel = `${achievement.progress}/${achievement.total}`
           const progressPercent =
             achievement.total > 0
@@ -123,23 +101,17 @@ export function AchievementsView({
           return (
             <li key={achievement.id}>
               <article
-                className={`flex flex-col items-center gap-2 rounded-2xl border-[3px] border-cosmos bg-white p-4 text-center transition-all ${
-                  achievement.unlocked
-                    ? "shadow-[3px_3px_0_0_var(--color-cosmos)]"
-                    : "opacity-60 grayscale"
+                className={`flex h-full flex-col items-center gap-2 rounded-3xl border-[3px] border-[#083344] bg-white p-4 text-center ${
+                  achievement.unlocked ? "shadow-[4px_4px_0_0_#083344]" : ""
                 }`}
               >
                 {/* Icon Circle */}
                 <div
-                  className={`flex size-16 items-center justify-center rounded-full border-[3px] ${
-                    achievement.unlocked
-                      ? styles.circle
-                      : "border-cosmos/40 bg-varden/50"
-                  }`}
+                  className={`flex size-14 items-center justify-center rounded-full border-[3px] border-[#083344] ${achievement.circleColor}`}
                 >
                   <Icon
-                    className={`size-7 ${
-                      achievement.unlocked ? styles.icon : "text-cosmos/50"
+                    className={`size-6 ${
+                      achievement.unlocked ? "text-white" : "text-gray-500"
                     }`}
                     strokeWidth={2.5}
                     aria-hidden="true"
@@ -147,31 +119,35 @@ export function AchievementsView({
                 </div>
 
                 {/* Title */}
-                <h3 className="text-sm font-bold leading-snug text-cosmos text-balance">
+                <h3
+                  className={`text-sm leading-snug text-balance ${
+                    achievement.unlocked ? "font-bold text-[#083344]" : "font-bold text-gray-500"
+                  }`}
+                >
                   {achievement.title}
                 </h3>
 
                 {/* Progress */}
                 {achievement.unlocked ? (
-                  <span className="rounded-full border-2 border-cosmos bg-varden px-2.5 py-0.5 text-xs font-bold text-cosmos">
+                  <span className="mt-auto rounded-full border-2 border-[#083344] bg-[#FDF6E3] px-3 py-0.5 text-xs font-bold text-[#083344]">
                     Desbloqueada!
                   </span>
                 ) : (
-                  <div className="flex w-full flex-col gap-1.5">
-                    <div className="relative h-2 w-full overflow-hidden rounded-full border-2 border-cosmos bg-varden">
+                  <div className="mt-auto flex w-full flex-col gap-1.5 pt-1">
+                    <div className="relative h-3 w-full overflow-hidden rounded-full border-2 border-[#083344] bg-white">
                       <progress
-                        className="absolute inset-0 h-full w-full appearance-none [&::-webkit-progress-bar]:bg-transparent [&::-webkit-progress-value]:bg-gochujang [&::-moz-progress-bar]:bg-gochujang"
+                        className="absolute inset-0 h-full w-full appearance-none [&::-webkit-progress-bar]:bg-transparent [&::-webkit-progress-value]:bg-[#5F9EA0] [&::-moz-progress-bar]:bg-[#5F9EA0]"
                         value={achievement.progress}
                         max={achievement.total}
                         aria-label={`Progresso: ${progressLabel}`}
                       />
                       <div
-                        className="absolute inset-0 h-full bg-gochujang transition-all"
+                        className="absolute inset-0 h-full bg-[#5F9EA0]"
                         style={{ width: `${progressPercent}%` }}
                         aria-hidden="true"
                       />
                     </div>
-                    <span className="text-xs font-bold text-cosmos/70">{progressLabel}</span>
+                    <span className="text-xs font-bold text-gray-500">{progressLabel}</span>
                   </div>
                 )}
               </article>

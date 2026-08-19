@@ -1,25 +1,25 @@
 "use client"
 
-import { User, Flame, Heart } from "lucide-react"
+import { User, Flame, Ticket } from "lucide-react"
 import Image from "next/image"
 import { useState } from "react"
 
 type GlobalHeaderProps = {
   readonly streakCount?: number
-  readonly livesCount?: number
+  readonly ticketsCount?: number
   readonly avatarUrl?: string
   readonly onAvatarClick?: () => void
   readonly onStreakClick?: () => void
-  readonly onLivesClick?: () => void
+  readonly onTicketsClick?: () => void
 }
 
 export function GlobalHeader({
   streakCount = 12,
-  livesCount = 5,
+  ticketsCount = 2,
   avatarUrl,
   onAvatarClick,
   onStreakClick,
-  onLivesClick,
+  onTicketsClick,
 }: GlobalHeaderProps) {
   const [avatarError, setAvatarError] = useState(false)
 
@@ -66,20 +66,21 @@ export function GlobalHeader({
           </span>
         </button>
 
-        {/* Lives Badge */}
+        {/* Tickets de Reposição Badge */}
         <button
           type="button"
-          onClick={onLivesClick}
-          className="flex items-center gap-1.5 rounded-full border-[3px] border-cosmos bg-card px-3 py-1.5 shadow-[2px_2px_0_0_var(--color-cosmos)] transition-all hover:-translate-y-0.5 hover:shadow-[2px_3px_0_0_var(--color-cosmos)] active:translate-y-0 active:shadow-[1px_1px_0_0_var(--color-cosmos)]"
-          aria-label={`${livesCount} vidas restantes`}
+          onClick={onTicketsClick}
+          className="flex items-center gap-1.5 rounded-full border-[3px] border-cosmos bg-white px-3 py-1.5 shadow-[2px_2px_0_0_var(--color-cosmos)] transition-all hover:-translate-y-0.5 hover:shadow-[2px_3px_0_0_var(--color-cosmos)] active:translate-y-0 active:shadow-[1px_1px_0_0_var(--color-cosmos)]"
+          aria-label={`${ticketsCount} tickets de reposição`}
+          title="Tickets de Reposição"
         >
-          <Heart 
-            className="size-5 fill-crimson text-crimson" 
-            strokeWidth={2} 
-            aria-hidden="true" 
+          <Ticket
+            className="size-5 text-yellow-500"
+            strokeWidth={2.5}
+            aria-hidden="true"
           />
           <span className="font-serif text-base font-bold text-cosmos">
-            {livesCount}
+            {ticketsCount}
           </span>
         </button>
       </div>

@@ -13,7 +13,7 @@ export function HomeView() {
     <div className="flex flex-col gap-6 pb-8">
       <GlobalHeader
         streakCount={12}
-        livesCount={5}
+        ticketsCount={2}
         avatarUrl="/mascot.png"
       />
 
