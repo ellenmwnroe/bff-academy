@@ -5,6 +5,7 @@ import { Clock } from "lucide-react"
 import { GlobalHeader } from "./global-header"
 import { JourneyHeroCard } from "./journey-hero-card"
 import { DailyMissionsCard } from "./daily-missions-card"
+import { LeaderboardView } from "./leaderboard-view"
 
 type PaletteVariant = "crimson" | "marble" | "varden"
 
@@ -122,6 +123,11 @@ export function HomeView() {
             })}
           </div>
         </section>
+
+        {/* Leaderboard */}
+        <div className="md:col-span-2">
+          <LeaderboardView daysRemaining={2} />
+        </div>
       </div>
       </div>
     </div>
