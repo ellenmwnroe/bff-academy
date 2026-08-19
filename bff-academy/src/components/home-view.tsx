@@ -5,7 +5,6 @@ import { GlobalHeader } from "./global-header"
 import { JourneyHeroCard } from "./journey-hero-card"
 import { DailyMissionsCard } from "./daily-missions-card"
 import { UpcomingClassesCarousel } from "./upcoming-classes-carousel"
-import { LeaderboardView } from "./leaderboard-view"
 
 export function HomeView() {
   const router = useRouter()
@@ -38,10 +37,6 @@ export function HomeView() {
 
       {/* Fora do padding lateral para o carrossel sangrar até a borda da tela */}
       <UpcomingClassesCarousel />
-
-      <div className="px-5">
-        <LeaderboardView daysRemaining={2} />
-      </div>
     </div>
   )
 }

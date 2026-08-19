@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { Home, BookOpen, Play, Sparkles, PenTool, Type, Mic2, Trophy } from "lucide-react"
+import { Home, BookOpen, Play, Sparkles, PenTool, Type, Mic2, Trophy, Award } from "lucide-react"
 
 export default function DebugMenu() {
   return (
@@ -29,13 +29,35 @@ export default function DebugMenu() {
         </Link>
 
         <Link
-          href="/dev"
+          href="/home"
           className="flex items-center gap-3 rounded-2xl border-[3px] border-gochujang bg-crimson px-6 py-4 font-bold text-varden shadow-[4px_4px_0_0_var(--color-gochujang)] transition-all hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[2px_2px_0_0_var(--color-gochujang)]"
         >
           <Home className="size-6" />
           <div className="flex-1 text-left">
             <div>Home View</div>
-            <div className="text-xs font-normal text-varden/90">Dashboard principal</div>
+            <div className="text-xs font-normal text-varden/90">Dashboard com menu inferior</div>
+          </div>
+        </Link>
+
+        <Link
+          href="/leaderboard"
+          className="flex items-center gap-3 rounded-2xl border-[3px] border-cosmos bg-varden px-6 py-4 font-bold text-cosmos shadow-[4px_4px_0_0_var(--color-cosmos)] transition-all hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[2px_2px_0_0_var(--color-cosmos)]"
+        >
+          <Trophy className="size-6" />
+          <div className="flex-1 text-left">
+            <div>Ranking Semanal</div>
+            <div className="text-xs font-normal text-cosmos/70">Leaderboard dos alunos</div>
+          </div>
+        </Link>
+
+        <Link
+          href="/profile"
+          className="flex items-center gap-3 rounded-2xl border-[3px] border-cosmos bg-card px-6 py-4 font-bold text-cosmos shadow-[4px_4px_0_0_var(--color-cosmos)] transition-all hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[2px_2px_0_0_var(--color-cosmos)]"
+        >
+          <Award className="size-6" />
+          <div className="flex-1 text-left">
+            <div>Conquistas</div>
+            <div className="text-xs font-normal text-cosmos/70">Galeria de medalhas</div>
           </div>
         </Link>
 

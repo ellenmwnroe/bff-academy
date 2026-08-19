@@ -1,57 +1,49 @@
 "use client"
 
-import { Home, Dumbbell, CalendarDays, User } from "lucide-react"
+import Link from "next/link"
+import { usePathname } from "next/navigation"
+import { Home, Trophy, User, type LucideIcon } from "lucide-react"
 
-type Tab = "home" | "practice" | "classes" | "profile"
+type NavItem = {
+  readonly href: string
+  readonly label: string
+  readonly icon: LucideIcon
+}
 
-const items: { id: Tab; label: string; icon: typeof Home }[] = [
-  { id: "home", label: "Início", icon: Home },
-  { id: "practice", label: "Praticar", icon: Dumbbell },
-  { id: "classes", label: "Aulas", icon: CalendarDays },
-  { id: "profile", label: "Perfil", icon: User },
+const navItems: ReadonlyArray<NavItem> = [
+  { href: "/home", label: "Home", icon: Home },
+  { href: "/leaderboard", label: "Ranking", icon: Trophy },
+  { href: "/profile", label: "Perfil", icon: User },
 ]
 
-export function BottomNav({
-  active,
-  onChange,
-}: {
-  active: Tab
-  onChange: (tab: Tab) => void
-}) {
+export function BottomNav() {
+  const pathname = usePathname()
+
   return (
-    <nav className="pointer-events-none fixed inset-x-0 bottom-4 z-20 flex justify-center px-4">
-      <ul className="pointer-events-auto flex items-center gap-1 rounded-[26px] border-[3px] border-[#00457F] bg-white p-1.5 shadow-[4px_4px_0_0_rgba(0,69,127,1)]">
-        {items.map(({ id, label, icon: Icon }) => {
-          const isActive = active === id
+    <nav
+      className="fixed bottom-0 left-0 z-50 w-full rounded-t-2xl border-t-2 border-cosmos bg-white pb-[calc(env(safe-area-inset-bottom)+1.25rem)]"
+      aria-label="Navegação principal"
+    >
+      <div className="flex w-full items-center justify-around px-2 pt-3">
+        {navItems.map((item) => {
+          const Icon = item.icon
+          const isActive = pathname === item.href || pathname.startsWith(`${item.href}/`)
+
           return (
-            <li key={id}>
-              <button
-                type="button"
-                onClick={() => onChange(id)}
-                aria-current={isActive ? "page" : undefined}
-                className={`flex flex-col items-center gap-0.5 rounded-2xl px-3.5 py-2 transition-all active:scale-90 ${
-                  isActive
-                    ? "border-2 border-[#8f3a03] bg-[#EC6206] shadow-[0_3px_0_0_#8f3a03]"
-                    : "border-2 border-transparent"
-                }`}
-              >
-                <Icon
-                  className="size-6"
-                  strokeWidth={2.75}
-                  color={isActive ? "#ffffff" : "#7FA8CE"}
-                  aria-hidden="true"
-                />
-                <span
-                  className="text-[10px] font-extrabold"
-                  style={{ color: isActive ? "#ffffff" : "#7FA8CE" }}
-                >
-                  {label}
-                </span>
-              </button>
-            </li>
+            <Link
+              key={item.href}
+              href={item.href}
+              aria-current={isActive ? "page" : undefined}
+              className={`flex flex-col items-center gap-1 transition-all active:scale-95 ${
+                isActive ? "-translate-y-0.5 text-crimson" : "text-cosmos/50"
+              }`}
+            >
+              <Icon className="size-6" strokeWidth={2.5} aria-hidden="true" />
+              <span className="text-[10px] font-bold">{item.label}</span>
+            </Link>
           )
         })}
-      </ul>
+      </div>
     </nav>
   )
 }
