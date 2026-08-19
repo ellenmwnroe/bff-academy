@@ -98,16 +98,13 @@ export function AchievementsView({
   achievements = mockAchievements,
 }: AchievementsViewProps) {
   return (
-    <section
-      className="rounded-3xl border-[3px] border-cosmos bg-marble p-6 shadow-[4px_4px_0_0_var(--color-cosmos)]"
-      aria-labelledby="achievements-title"
-    >
+    <section aria-labelledby="achievements-title">
       {/* Header */}
-      <header className="mb-6 flex items-center gap-3">
-        <div className="grid size-12 place-items-center rounded-2xl border-[3px] border-cosmos bg-crimson shadow-[3px_3px_0_0_var(--color-cosmos)]">
-          <Award className="size-6 fill-varden text-varden" strokeWidth={2.5} aria-hidden="true" />
+      <header className="mb-4 flex items-center gap-3">
+        <div className="grid size-10 place-items-center rounded-xl border-2 border-cosmos bg-crimson">
+          <Award className="size-5 fill-varden text-varden" strokeWidth={2.5} aria-hidden="true" />
         </div>
-        <h2 id="achievements-title" className="font-serif text-2xl font-black text-cosmos">
+        <h2 id="achievements-title" className="font-serif text-lg font-black text-cosmos">
           Minhas Conquistas
         </h2>
       </header>
