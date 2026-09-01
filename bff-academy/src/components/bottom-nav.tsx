@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Home, Trophy, User, type LucideIcon } from "lucide-react"
+import { Home, MessageSquare, Trophy, User, type LucideIcon } from "lucide-react"
 
 type NavItem = {
   readonly href: string
@@ -12,6 +12,7 @@ type NavItem = {
 
 const navItems: ReadonlyArray<NavItem> = [
   { href: "/home", label: "Home", icon: Home },
+  { href: "/feed", label: "Comunidade", icon: MessageSquare },
   { href: "/leaderboard", label: "Ranking", icon: Trophy },
   { href: "/profile", label: "Perfil", icon: User },
 ]

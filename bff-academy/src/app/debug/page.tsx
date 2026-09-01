@@ -14,6 +14,7 @@ import {
   LogIn,
   Rocket,
   Dumbbell,
+  MessageSquare,
   type LucideIcon,
 } from "lucide-react"
 
@@ -55,6 +56,13 @@ const sections: ReadonlyArray<DebugSection> = [
         description: "Dashboard, missões e aulas",
         icon: Home,
         variant: "crimson",
+      },
+      {
+        href: "/feed",
+        label: "Comunidade",
+        description: "Feed social dos alunos",
+        icon: MessageSquare,
+        variant: "marble",
       },
       {
         href: "/leaderboard",
