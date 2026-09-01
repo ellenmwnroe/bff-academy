@@ -1,15 +1,25 @@
 "use client"
 
-import { useMemo, useState } from "react"
-import { ChevronLeft, ChevronRight, Clock, Ticket } from "lucide-react"
+import { useEffect, useMemo, useState } from "react"
+import { ChevronLeft, ChevronRight, Clock, Ticket, CalendarX } from "lucide-react"
 import { BottomNav } from "../../components/bottom-nav"
+import { CancelClassModal } from "../../components/cancel-class-modal"
+import { RescheduleClassModal } from "../../components/reschedule-class-modal"
+import {
+  fetchMakeupSlots,
+  formatSlotTimeRange,
+  type MakeupSlot,
+} from "../../lib/makeup-slots"
 
 type ScheduledClass = {
   readonly id: string
   readonly timeRange: string
   readonly title: string
   readonly teacher: string
+  readonly hoursUntilClass: number
 }
+
+type ClassesByDate = Record<string, ReadonlyArray<ScheduledClass>>
 
 const WEEKDAY_INITIALS = ["D", "S", "T", "Q", "Q", "S", "S"]
 
@@ -28,45 +38,56 @@ const MONTH_NAMES = [
   "Dezembro",
 ]
 
+const today = new Date()
+
 function toDateKey(year: number, month: number, day: number) {
   return `${year}-${month}-${day}`
 }
 
-const today = new Date()
+/** Normaliza o transbordo de mês (ex.: dia 30 + 5) usando o próprio Date. */
+function dateFromOffset(dayOffset: number) {
+  return new Date(today.getFullYear(), today.getMonth(), today.getDate() + dayOffset)
+}
 
-/**
- * Aulas ancoradas no mês atual para o mock sempre aparecer preenchido,
- * independente de quando a página for aberta.
- */
-const mockClasses: Record<string, ReadonlyArray<ScheduledClass>> = {
-  [toDateKey(today.getFullYear(), today.getMonth(), today.getDate())]: [
+function keyFromOffset(dayOffset: number) {
+  const date = dateFromOffset(dayOffset)
+  return toDateKey(date.getFullYear(), date.getMonth(), date.getDate())
+}
+
+/** Aulas ancoradas no dia de hoje para o mock sempre abrir preenchido. */
+const initialClasses: ClassesByDate = {
+  [keyFromOffset(0)]: [
     {
       id: "1",
       timeRange: "19:00 - 20:00",
       title: "Speaking Club",
       teacher: "Prof. Marina",
+      hoursUntilClass: 3,
     },
     {
       id: "2",
       timeRange: "20:30 - 21:30",
       title: "Grammar Fix",
       teacher: "Prof. Lucas",
+      hoursUntilClass: 6,
     },
   ],
-  [toDateKey(today.getFullYear(), today.getMonth(), today.getDate() + 2)]: [
+  [keyFromOffset(2)]: [
     {
       id: "3",
       timeRange: "09:00 - 10:00",
       title: "Pronúncia: TH Sounds",
       teacher: "Prof. Kate",
+      hoursUntilClass: 48,
     },
   ],
-  [toDateKey(today.getFullYear(), today.getMonth(), today.getDate() + 5)]: [
+  [keyFromOffset(5)]: [
     {
       id: "4",
       timeRange: "15:00 - 16:00",
       title: "Conversation Practice",
       teacher: "Prof. John",
+      hoursUntilClass: 120,
     },
   ],
 }
@@ -77,6 +98,31 @@ export default function CalendarPage() {
     month: today.getMonth(),
   })
   const [selectedDay, setSelectedDay] = useState(today.getDate())
+  const [classesByDate, setClassesByDate] = useState<ClassesByDate>(initialClasses)
+  const [tickets, setTickets] = useState(1)
+  const [classToCancel, setClassToCancel] = useState<ScheduledClass | null>(null)
+  const [isRescheduleOpen, setIsRescheduleOpen] = useState(false)
+  const [slots, setSlots] = useState<ReadonlyArray<MakeupSlot>>([])
+  const [isLoadingSlots, setIsLoadingSlots] = useState(false)
+
+  useEffect(() => {
+    if (!isRescheduleOpen) return
+
+    let isCurrent = true
+    setIsLoadingSlots(true)
+
+    fetchMakeupSlots()
+      .then((availableSlots) => {
+        if (isCurrent) setSlots(availableSlots)
+      })
+      .finally(() => {
+        if (isCurrent) setIsLoadingSlots(false)
+      })
+
+    return () => {
+      isCurrent = false
+    }
+  }, [isRescheduleOpen])
 
   const { leadingBlanks, daysInMonth } = useMemo(() => {
     const firstWeekday = new Date(visibleMonth.year, visibleMonth.month, 1).getDay()
@@ -100,15 +146,90 @@ export default function CalendarPage() {
     visibleMonth.month === today.getMonth() &&
     day === today.getDate()
 
-  const hasClasses = (day: number) =>
-    Boolean(mockClasses[toDateKey(visibleMonth.year, visibleMonth.month, day)])
+  const hasClasses = (day: number) => {
+    const dayClasses = classesByDate[toDateKey(visibleMonth.year, visibleMonth.month, day)]
+    return Boolean(dayClasses && dayClasses.length > 0)
+  }
 
-  const selectedClasses =
-    mockClasses[toDateKey(visibleMonth.year, visibleMonth.month, selectedDay)] ?? []
+  const selectedDayKey = toDateKey(visibleMonth.year, visibleMonth.month, selectedDay)
+  const selectedClasses = classesByDate[selectedDayKey] ?? []
+
+  const confirmCancel = () => {
+    if (!classToCancel) return
+
+    setClassesByDate((current) => ({
+      ...current,
+      [selectedDayKey]: (current[selectedDayKey] ?? []).filter(
+        (item) => item.id !== classToCancel.id,
+      ),
+    }))
+
+    if (classToCancel.hoursUntilClass >= 5) {
+      setTickets((current) => current + 1)
+    }
+
+    setClassToCancel(null)
+  }
+
+  const confirmReschedule = (slotId: string) => {
+    const slot = slots.find((item) => item.id === slotId)
+    if (!slot) return
+
+    const slotDate = new Date(slot.startsAt)
+    const slotKey = toDateKey(
+      slotDate.getFullYear(),
+      slotDate.getMonth(),
+      slotDate.getDate(),
+    )
+    const hoursUntilClass = Math.round(
+      (slotDate.getTime() - Date.now()) / (1000 * 60 * 60),
+    )
+
+    setClassesByDate((current) => ({
+      ...current,
+      [slotKey]: [
+        ...(current[slotKey] ?? []),
+        {
+          id: `makeup-${slot.id}-${Date.now()}`,
+          timeRange: formatSlotTimeRange(slot),
+          title: slot.title,
+          teacher: slot.teacherName,
+          hoursUntilClass,
+        },
+      ],
+    }))
+
+    setTickets((current) => current - 1)
+    setVisibleMonth({ year: slotDate.getFullYear(), month: slotDate.getMonth() })
+    setSelectedDay(slotDate.getDate())
+    setIsRescheduleOpen(false)
+  }
 
   return (
     <main className="flex min-h-screen flex-col bg-[#FDF6E3] px-4 pb-28 pt-8">
       <h1 className="mb-6 text-2xl font-black text-[#083344]">Minha Agenda</h1>
+
+      {/* Saldo de tickets */}
+      <section className="mb-4 flex items-center gap-3 rounded-2xl border-[3px] border-[#083344] bg-white p-4 shadow-[4px_4px_0_0_#083344]">
+        <div className="grid size-11 shrink-0 place-items-center rounded-xl border-[3px] border-[#083344] bg-[#FDD835]">
+          <Ticket className="size-5 text-[#083344]" strokeWidth={2.5} aria-hidden="true" />
+        </div>
+
+        <div className="min-w-0 flex-1">
+          <p className="text-lg font-black leading-tight text-[#083344]">
+            {tickets} {tickets === 1 ? "Ticket" : "Tickets"}
+          </p>
+          <p className="text-xs font-bold text-[#083344]/60">De reposição disponíveis</p>
+        </div>
+
+        <button
+          type="button"
+          onClick={() => setIsRescheduleOpen(true)}
+          className="shrink-0 rounded-xl border-[3px] border-[#083344] bg-[#083344] px-4 py-2.5 text-sm font-bold text-white transition-all active:scale-95"
+        >
+          Agendar reposição
+        </button>
+      </section>
 
       {/* Calendário */}
       <section className="rounded-3xl border-[3px] border-[#083344] bg-white p-5 shadow-[4px_4px_0_0_#083344]">
@@ -238,16 +359,35 @@ export default function CalendarPage() {
 
                 <button
                   type="button"
+                  onClick={() => setClassToCancel(scheduledClass)}
                   className="flex items-center gap-1.5 rounded-xl border-[3px] border-[#083344] bg-white px-4 py-2.5 text-sm font-bold text-[#BE1622] transition-all active:scale-95"
                 >
-                  <Ticket className="size-4" strokeWidth={2.5} aria-hidden="true" />
-                  Remarcar
+                  <CalendarX className="size-4" strokeWidth={2.5} aria-hidden="true" />
+                  Cancelar
                 </button>
               </div>
             </article>
           ))
         )}
       </section>
+
+      <CancelClassModal
+        isOpen={classToCancel !== null}
+        lessonTitle={classToCancel?.title}
+        lessonTime={classToCancel?.timeRange}
+        hoursUntilClass={classToCancel?.hoursUntilClass}
+        onClose={() => setClassToCancel(null)}
+        onConfirm={confirmCancel}
+      />
+
+      <RescheduleClassModal
+        isOpen={isRescheduleOpen}
+        ticketsAvailable={tickets}
+        slots={slots}
+        isLoadingSlots={isLoadingSlots}
+        onClose={() => setIsRescheduleOpen(false)}
+        onConfirm={confirmReschedule}
+      />
 
       <BottomNav />
     </main>
