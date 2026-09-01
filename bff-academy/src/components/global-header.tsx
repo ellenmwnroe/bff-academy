@@ -1,13 +1,15 @@
 "use client"
 
-import { User, Flame, Ticket } from "lucide-react"
+import { User, Flame, Ticket, CalendarDays } from "lucide-react"
 import Image from "next/image"
+import Link from "next/link"
 import { useState } from "react"
 
 type GlobalHeaderProps = {
   readonly streakCount?: number
   readonly ticketsCount?: number
   readonly avatarUrl?: string
+  readonly calendarHref?: string
   readonly onAvatarClick?: () => void
   readonly onStreakClick?: () => void
   readonly onTicketsClick?: () => void
@@ -17,6 +19,7 @@ export function GlobalHeader({
   streakCount = 12,
   ticketsCount = 2,
   avatarUrl,
+  calendarHref = "/calendar",
   onAvatarClick,
   onStreakClick,
   onTicketsClick,
@@ -83,6 +86,20 @@ export function GlobalHeader({
             {ticketsCount}
           </span>
         </button>
+
+        {/* Atalho para a Agenda */}
+        <Link
+          href={calendarHref}
+          className="grid size-10 shrink-0 place-items-center rounded-full border-[3px] border-cosmos bg-marble shadow-[2px_2px_0_0_var(--color-cosmos)] transition-all hover:-translate-y-0.5 hover:shadow-[2px_3px_0_0_var(--color-cosmos)] active:translate-y-0 active:shadow-[1px_1px_0_0_var(--color-cosmos)]"
+          aria-label="Abrir minha agenda de aulas"
+          title="Minha Agenda"
+        >
+          <CalendarDays
+            className="size-5 text-cosmos"
+            strokeWidth={2.5}
+            aria-hidden="true"
+          />
+        </Link>
       </div>
     </header>
   )

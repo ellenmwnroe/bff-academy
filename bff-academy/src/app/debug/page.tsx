@@ -15,6 +15,7 @@ import {
   Rocket,
   Dumbbell,
   MessageSquare,
+  CalendarDays,
   type LucideIcon,
 } from "lucide-react"
 
@@ -63,6 +64,13 @@ const sections: ReadonlyArray<DebugSection> = [
         description: "Feed social dos alunos",
         icon: MessageSquare,
         variant: "marble",
+      },
+      {
+        href: "/calendar",
+        label: "Minha Agenda",
+        description: "Calendário de aulas",
+        icon: CalendarDays,
+        variant: "card",
       },
       {
         href: "/leaderboard",
