@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useMemo, useState } from "react"
+import Link from "next/link"
 import { ChevronLeft, ChevronRight, Clock, Ticket, CalendarX } from "lucide-react"
 import { BottomNav } from "../../components/bottom-nav"
 import { CancelClassModal } from "../../components/cancel-class-modal"
@@ -350,12 +351,12 @@ export default function CalendarPage() {
               </div>
 
               <div className="mt-4 flex gap-2">
-                <button
-                  type="button"
-                  className="flex-1 rounded-xl border-[3px] border-[#083344] bg-[#083344] px-4 py-2.5 text-sm font-bold text-white transition-all active:scale-95"
+                <Link
+                  href="/live"
+                  className="flex-1 rounded-xl border-[3px] border-[#083344] bg-[#083344] px-4 py-2.5 text-center text-sm font-bold text-white transition-all active:scale-95"
                 >
                   Entrar na Aula
-                </button>
+                </Link>
 
                 <button
                   type="button"

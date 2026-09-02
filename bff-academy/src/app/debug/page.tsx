@@ -16,6 +16,7 @@ import {
   Dumbbell,
   MessageSquare,
   CalendarDays,
+  Radio,
   type LucideIcon,
 } from "lucide-react"
 
@@ -133,6 +134,13 @@ const sections: ReadonlyArray<DebugSection> = [
     id: "extras",
     title: "Outros",
     links: [
+      {
+        href: "/live",
+        label: "Sala Ao Vivo",
+        description: "Videochamada com chat da turma",
+        icon: Radio,
+        variant: "crimson",
+      },
       {
         href: "/dev",
         label: "Home sem menu",
