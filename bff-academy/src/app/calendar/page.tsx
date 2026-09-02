@@ -352,7 +352,7 @@ export default function CalendarPage() {
 
               <div className="mt-4 flex gap-2">
                 <Link
-                  href="/live"
+                  href="/class-details"
                   className="flex-1 rounded-xl border-[3px] border-[#083344] bg-[#083344] px-4 py-2.5 text-center text-sm font-bold text-white transition-all active:scale-95"
                 >
                   Entrar na Aula

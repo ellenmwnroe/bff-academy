@@ -17,6 +17,7 @@ import {
   MessageSquare,
   CalendarDays,
   Radio,
+  FileText,
   type LucideIcon,
 } from "lucide-react"
 
@@ -134,6 +135,13 @@ const sections: ReadonlyArray<DebugSection> = [
     id: "extras",
     title: "Outros",
     links: [
+      {
+        href: "/class-details",
+        label: "Detalhes da Aula",
+        description: "Antessala com ementa e materiais",
+        icon: FileText,
+        variant: "varden",
+      },
       {
         href: "/live",
         label: "Sala Ao Vivo",
