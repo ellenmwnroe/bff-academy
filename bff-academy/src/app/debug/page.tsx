@@ -18,6 +18,7 @@ import {
   CalendarDays,
   Radio,
   FileText,
+  LayoutDashboard,
   type LucideIcon,
 } from "lucide-react"
 
@@ -135,6 +136,13 @@ const sections: ReadonlyArray<DebugSection> = [
     id: "extras",
     title: "Outros",
     links: [
+      {
+        href: "/admin",
+        label: "Dashboard Admin",
+        description: "Painel de KPIs e gestão (desktop)",
+        icon: LayoutDashboard,
+        variant: "crimson",
+      },
       {
         href: "/class-details",
         label: "Detalhes da Aula",
