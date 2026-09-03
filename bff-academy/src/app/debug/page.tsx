@@ -19,6 +19,7 @@ import {
   Radio,
   FileText,
   LayoutDashboard,
+  Bot,
   type LucideIcon,
 } from "lucide-react"
 
@@ -156,6 +157,13 @@ const sections: ReadonlyArray<DebugSection> = [
         description: "Videochamada com chat da turma",
         icon: Radio,
         variant: "crimson",
+      },
+      {
+        href: "/ai-training",
+        label: "Simulador de IA",
+        description: "Entrevista com energia e níveis",
+        icon: Bot,
+        variant: "marble",
       },
       {
         href: "/dev",
