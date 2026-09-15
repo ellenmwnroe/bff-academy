@@ -153,6 +153,13 @@ const sections: ReadonlyArray<DebugSection> = [
         variant: "varden",
       },
       {
+        href: "/teacher/schedule",
+        label: "Agenda do Professor",
+        description: "Horários livres e oportunidades",
+        icon: CalendarDays,
+        variant: "card",
+      },
+      {
         href: "/class-details",
         label: "Detalhes da Aula",
         description: "Antessala com ementa e materiais",
