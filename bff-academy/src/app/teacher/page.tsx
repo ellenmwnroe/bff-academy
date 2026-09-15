@@ -409,7 +409,7 @@ export default function TeacherDashboardPage() {
 
                       {lesson.status === "past" ? (
                         <Link
-                          href="/teacher/grades"
+                          href="/teacher/evaluation"
                           className="flex w-full items-center justify-center gap-2 rounded-xl border-[3px] border-[#083344] bg-[#083344] px-4 py-2.5 text-sm font-black text-white shadow-[3px_3px_0_0_#083344] transition-all active:translate-y-1 active:shadow-none"
                         >
                           <BookOpen className="size-4" strokeWidth={2.5} aria-hidden="true" />
@@ -490,7 +490,7 @@ export default function TeacherDashboardPage() {
             )}
 
             <Link
-              href="/teacher/grades"
+              href="/teacher/evaluation"
               className="mt-auto flex w-full items-center justify-center gap-2 rounded-2xl border-[3px] border-[#083344] bg-[#083344] px-4 py-3.5 font-black text-white shadow-[4px_4px_0_0_#083344] transition-all active:translate-y-1 active:shadow-none"
             >
               <BookOpen className="size-5" strokeWidth={2.5} aria-hidden="true" />

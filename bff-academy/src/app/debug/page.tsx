@@ -21,6 +21,7 @@ import {
   LayoutDashboard,
   Bot,
   GraduationCap,
+  ClipboardCheck,
   type LucideIcon,
 } from "lucide-react"
 
@@ -158,6 +159,13 @@ const sections: ReadonlyArray<DebugSection> = [
         description: "Horários livres e oportunidades",
         icon: CalendarDays,
         variant: "card",
+      },
+      {
+        href: "/teacher/evaluation",
+        label: "Avaliação Pós-Aula",
+        description: "Diário de classe e revisão pós-aula",
+        icon: ClipboardCheck,
+        variant: "marble",
       },
       {
         href: "/class-details",
