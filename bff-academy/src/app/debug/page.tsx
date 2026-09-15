@@ -21,6 +21,7 @@ import {
   LayoutDashboard,
   Bot,
   GraduationCap,
+  UserPlus,
   ClipboardCheck,
   User,
   type LucideIcon,
@@ -145,6 +146,13 @@ const sections: ReadonlyArray<DebugSection> = [
         label: "Dashboard Admin",
         description: "Painel de KPIs e gestão (desktop)",
         icon: LayoutDashboard,
+        variant: "crimson",
+      },
+      {
+        href: "/teacher/apply",
+        label: "Cadastro de Professores",
+        description: "Página pública para novos docentes",
+        icon: UserPlus,
         variant: "crimson",
       },
       {
