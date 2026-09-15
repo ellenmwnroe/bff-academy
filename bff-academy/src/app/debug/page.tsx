@@ -22,6 +22,7 @@ import {
   Bot,
   GraduationCap,
   ClipboardCheck,
+  User,
   type LucideIcon,
 } from "lucide-react"
 
@@ -166,6 +167,13 @@ const sections: ReadonlyArray<DebugSection> = [
         description: "Diário de classe e revisão pós-aula",
         icon: ClipboardCheck,
         variant: "marble",
+      },
+      {
+        href: "/teacher/student/1",
+        label: "Dossiê do Aluno",
+        description: "Histórico pedagógico e insights de IA",
+        icon: User,
+        variant: "varden",
       },
       {
         href: "/class-details",

@@ -1,6 +1,6 @@
 "use client"
 
-import { useMemo, useState } from "react"
+import { useMemo, useRef, useState } from "react"
 import Link from "next/link"
 import {
   Video,
@@ -10,8 +10,7 @@ import {
   CalendarDays,
   ChevronLeft,
   ChevronRight,
-  User,
-  Zap,
+  Flame,
 } from "lucide-react"
 
 const teacherName = "Marina"
@@ -143,7 +142,26 @@ const mockDays: Record<string, DayPlan> = {
   },
 }
 
+const CLASS_FILTERS = [
+  "Todas",
+  "Flex 1",
+  "Flex 2",
+  "Flex 3",
+  "Flex 4",
+  "Particular",
+] as const
+
+type ClassFilter = (typeof CLASS_FILTERS)[number]
+
 const emptyDay: DayPlan = { lessons: [], students: [] }
+
+function groupFromLesson(title: string): ClassFilter {
+  if (title.includes("Flex 1")) return "Flex 1"
+  if (title.includes("Flex 2")) return "Flex 2"
+  if (title.includes("Flex 3")) return "Flex 3"
+  if (title.includes("Flex 4")) return "Flex 4"
+  return "Particular"
+}
 
 const nextClass = {
   timeLabel: "Hoje às 15:00",
@@ -157,6 +175,8 @@ export default function TeacherDashboardPage() {
     month: today.getMonth(),
   })
   const [selectedDay, setSelectedDay] = useState(today.getDate())
+  const [classFilter, setClassFilter] = useState<ClassFilter>("Todas")
+  const studentsSectionRef = useRef<HTMLElement>(null)
 
   const { leadingBlanks, daysInMonth } = useMemo(() => {
     const firstWeekday = new Date(visibleMonth.year, visibleMonth.month, 1).getDay()
@@ -170,6 +190,15 @@ export default function TeacherDashboardPage() {
 
   const selectedKey = toDateKey(visibleMonth.year, visibleMonth.month, selectedDay)
   const selectedPlan = mockDays[selectedKey] ?? emptyDay
+  const visibleStudents =
+    classFilter === "Todas"
+      ? selectedPlan.students
+      : selectedPlan.students.filter((student) => student.group === classFilter)
+
+  const showStudentsForClass = (lessonTitle: string) => {
+    setClassFilter(groupFromLesson(lessonTitle))
+    studentsSectionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" })
+  }
 
   const goToMonth = (offset: number) => {
     setVisibleMonth((current) => {
@@ -413,11 +442,12 @@ export default function TeacherDashboardPage() {
                           className="flex w-full items-center justify-center gap-2 rounded-xl border-[3px] border-[#083344] bg-[#083344] px-4 py-2.5 text-sm font-black text-white shadow-[3px_3px_0_0_#083344] transition-all active:translate-y-1 active:shadow-none"
                         >
                           <BookOpen className="size-4" strokeWidth={2.5} aria-hidden="true" />
-                          Lançar Notas/XP
+                          Revisar Diário
                         </Link>
                       ) : (
                         <button
                           type="button"
+                          onClick={() => showStudentsForClass(lesson.title)}
                           className={`flex w-full items-center justify-center gap-2 rounded-xl border-[3px] px-4 py-2.5 text-sm font-black shadow-[3px_3px_0_0_#083344] transition-all active:translate-y-1 active:shadow-none ${
                             isNext
                               ? "border-white bg-white text-[#083344]"
@@ -436,54 +466,91 @@ export default function TeacherDashboardPage() {
           </section>
 
           <section
+            ref={studentsSectionRef}
             aria-labelledby="students-title"
             className="flex flex-col rounded-2xl border-[3px] border-[#083344] bg-white p-4 shadow-[4px_4px_0_0_#083344] sm:p-6"
           >
-            <header className="mb-4 flex items-center justify-between gap-3">
-              <div className="flex min-w-0 items-center gap-3">
-                <span className="grid size-10 shrink-0 place-items-center rounded-xl border-[3px] border-[#083344] bg-[#FDF6E3]">
-                  <Users className="size-5 text-[#083344]" strokeWidth={2.5} aria-hidden="true" />
+            <header className="mb-4 flex flex-col gap-3">
+              <div className="flex items-center justify-between gap-3">
+                <div className="flex min-w-0 items-center gap-3">
+                  <span className="grid size-10 shrink-0 place-items-center rounded-xl border-[3px] border-[#083344] bg-[#FDF6E3]">
+                    <Users className="size-5 text-[#083344]" strokeWidth={2.5} aria-hidden="true" />
+                  </span>
+                  <h2 id="students-title" className="text-lg font-black text-[#083344] sm:text-xl">
+                    Alunos
+                  </h2>
+                </div>
+
+                <span className="shrink-0 rounded-full border-2 border-[#083344] bg-[#FDF6E3] px-3 py-1 text-xs font-bold text-[#083344]">
+                  {visibleStudents.length}
                 </span>
-                <h2 id="students-title" className="text-lg font-black text-[#083344] sm:text-xl">
-                  Alunos do Dia
-                </h2>
               </div>
 
-              <span className="shrink-0 rounded-full border-2 border-[#083344] bg-[#FDF6E3] px-3 py-1 text-xs font-bold text-[#083344]">
-                {selectedPlan.students.length}
-              </span>
+              <div className="flex gap-2 overflow-x-auto pb-1">
+                {CLASS_FILTERS.map((filter) => {
+                  const isActive = classFilter === filter
+
+                  return (
+                    <button
+                      key={filter}
+                      type="button"
+                      onClick={() => setClassFilter(filter)}
+                      aria-pressed={isActive}
+                      className={`shrink-0 rounded-full border-2 border-[#083344] px-3 py-1.5 text-xs font-black transition-all active:scale-95 ${
+                        isActive
+                          ? "bg-[#083344] text-white"
+                          : "bg-[#FDF6E3] text-[#083344]"
+                      }`}
+                    >
+                      {filter}
+                    </button>
+                  )
+                })}
+              </div>
             </header>
 
-            {selectedPlan.students.length === 0 ? (
+            {visibleStudents.length === 0 ? (
               <div className="rounded-xl border-[3px] border-dashed border-[#083344]/30 p-6 text-center">
                 <p className="text-sm font-bold text-[#083344]/60">
-                  Nenhum aluno neste dia.
+                  Nenhum aluno nesta turma para o dia selecionado.
                 </p>
               </div>
             ) : (
               <ul className="mb-4 flex flex-col gap-2">
-                {selectedPlan.students.map((student) => (
-                  <li
-                    key={student.id}
-                    className="flex items-center gap-3 rounded-xl border-2 border-[#083344] bg-[#FDF6E3] p-3"
-                  >
-                    <span className="grid size-9 shrink-0 place-items-center rounded-full border-2 border-[#083344] bg-white">
-                      <User className="size-4 text-[#083344]" strokeWidth={2.5} aria-hidden="true" />
-                    </span>
+                {visibleStudents.map((student) => (
+                  <li key={student.id}>
+                    <Link
+                      href={`/teacher/student/${student.id}`}
+                      className="flex items-center gap-3 rounded-xl border-[3px] border-[#083344] bg-[#FDF6E3] p-3 shadow-[2px_2px_0_0_#083344] transition-all hover:-translate-y-0.5 hover:shadow-[2px_3px_0_0_#083344] active:translate-y-0.5 active:shadow-none"
+                    >
+                      <span className="grid size-9 shrink-0 place-items-center rounded-full border-2 border-[#083344] bg-white text-xs font-black text-[#083344]">
+                        {student.name
+                          .split(" ")
+                          .slice(0, 2)
+                          .map((part) => part[0])
+                          .join("")}
+                      </span>
 
-                    <div className="min-w-0 flex-1">
-                      <p className="truncate font-bold text-[#083344]">{student.name}</p>
-                      <p className="text-xs font-medium text-[#083344]/60">{student.group}</p>
-                    </div>
+                      <div className="min-w-0 flex-1">
+                        <p className="truncate font-bold text-[#083344]">{student.name}</p>
+                        <p className="text-xs font-medium text-[#083344]/60">{student.group}</p>
+                      </div>
 
-                    <span className="flex shrink-0 items-center gap-1 text-xs font-black text-[#083344]">
-                      <Zap
-                        className="size-3.5 fill-[#F59E0B] text-[#F59E0B]"
+                      <span className="flex shrink-0 items-center gap-1 text-xs font-black text-[#083344]">
+                        <Flame
+                          className="size-3.5 fill-[#BE1622] text-[#BE1622]"
+                          strokeWidth={2}
+                          aria-hidden="true"
+                        />
+                        {student.streak}d
+                      </span>
+
+                      <ChevronRight
+                        className="size-5 shrink-0 text-[#083344]/50"
                         strokeWidth={2.5}
                         aria-hidden="true"
                       />
-                      {student.streak}d
-                    </span>
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -494,7 +561,7 @@ export default function TeacherDashboardPage() {
               className="mt-auto flex w-full items-center justify-center gap-2 rounded-2xl border-[3px] border-[#083344] bg-[#083344] px-4 py-3.5 font-black text-white shadow-[4px_4px_0_0_#083344] transition-all active:translate-y-1 active:shadow-none"
             >
               <BookOpen className="size-5" strokeWidth={2.5} aria-hidden="true" />
-              Lançar Notas/XP
+              Revisar Diário de Classe
             </Link>
           </section>
         </div>
