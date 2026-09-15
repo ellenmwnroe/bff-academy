@@ -96,7 +96,7 @@ export function LeaderboardView({
     }
 
     const podiumRankColor: Record<number, string> = {
-      1: "text-yellow-500",
+      1: "text-marble",
       2: "text-gray-400",
       3: "text-orange-500",
     }

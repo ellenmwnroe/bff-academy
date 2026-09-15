@@ -62,11 +62,11 @@ export default function AdminStudentsPage() {
     <>
       {/* Cabeçalho */}
       <header className="flex flex-wrap items-center justify-between gap-4">
-        <h1 className="text-3xl font-black text-[#083344]">Gestão de Alunos</h1>
+        <h1 className="text-3xl font-black text-cosmos">Gestão de Alunos</h1>
 
         <button
           type="button"
-          className="flex items-center gap-2 rounded-xl border-[3px] border-[#083344] bg-[#083344] px-4 py-2.5 text-sm font-bold text-white shadow-[3px_3px_0_0_#083344] transition-all active:translate-y-0.5 active:shadow-none"
+          className="flex items-center gap-2 rounded-xl border-[3px] border-cosmos bg-cosmos px-4 py-2.5 text-sm font-bold text-white shadow-[3px_3px_0_0_var(--color-cosmos)] transition-all active:translate-y-0.5 active:shadow-none"
         >
           <UserPlus className="size-4" strokeWidth={2.5} aria-hidden="true" />
           Matricular Aluno
@@ -77,7 +77,7 @@ export default function AdminStudentsPage() {
       <section className="flex flex-wrap items-center gap-3">
         <div className="relative min-w-64 flex-1">
           <Search
-            className="pointer-events-none absolute left-4 top-1/2 size-5 -translate-y-1/2 text-[#083344]/50"
+            className="pointer-events-none absolute left-4 top-1/2 size-5 -translate-y-1/2 text-cosmos/50"
             strokeWidth={2.5}
             aria-hidden="true"
           />
@@ -87,16 +87,16 @@ export default function AdminStudentsPage() {
             onChange={(event) => setSearch(event.target.value)}
             placeholder="Buscar aluno pelo nome..."
             aria-label="Buscar aluno pelo nome"
-            className="w-full rounded-xl border-[3px] border-[#083344] bg-white py-3 pl-12 pr-4 font-medium text-[#083344] shadow-[3px_3px_0_0_#083344] outline-none placeholder:text-[#083344]/40 focus:border-[#BE1622]"
+            className="w-full rounded-xl border-[3px] border-cosmos bg-white py-3 pl-12 pr-4 font-medium text-cosmos shadow-[3px_3px_0_0_var(--color-cosmos)] outline-none placeholder:text-cosmos/40 focus:border-crimson"
           />
         </div>
 
-        <label className="flex items-center gap-2 rounded-xl border-[3px] border-[#083344] bg-white px-4 py-3 shadow-[3px_3px_0_0_#083344]">
-          <span className="text-sm font-bold text-[#083344]">Filtrar por nível:</span>
+        <label className="flex items-center gap-2 rounded-xl border-[3px] border-cosmos bg-white px-4 py-3 shadow-[3px_3px_0_0_var(--color-cosmos)]">
+          <span className="text-sm font-bold text-cosmos">Filtrar por nível:</span>
           <select
             value={levelFilter}
             onChange={(event) => setLevelFilter(event.target.value)}
-            className="cursor-pointer bg-transparent font-bold text-[#083344] outline-none"
+            className="cursor-pointer bg-transparent font-bold text-cosmos outline-none"
           >
             {levelFilters.map((level) => (
               <option key={level} value={level}>
@@ -108,35 +108,35 @@ export default function AdminStudentsPage() {
       </section>
 
       {/* Tabela */}
-      <section className="rounded-2xl border-[3px] border-[#083344] bg-white p-6 shadow-[4px_4px_0_0_#083344]">
+      <section className="rounded-2xl border-[3px] border-cosmos bg-white p-6 shadow-[4px_4px_0_0_var(--color-cosmos)]">
         <table className="w-full border-collapse text-left">
           <thead>
-            <tr className="border-b-2 border-[#083344]">
-              <th className="pb-3 text-sm font-black text-[#083344]">Nome do Aluno</th>
-              <th className="pb-3 text-sm font-black text-[#083344]">Nível</th>
-              <th className="pb-3 text-sm font-black text-[#083344]">Ofensiva</th>
-              <th className="pb-3 text-sm font-black text-[#083344]">Presença</th>
-              <th className="pb-3 text-sm font-black text-[#083344]">Status</th>
-              <th className="pb-3 text-right text-sm font-black text-[#083344]">Ações</th>
+            <tr className="border-b-2 border-cosmos">
+              <th className="pb-3 text-sm font-black text-cosmos">Nome do Aluno</th>
+              <th className="pb-3 text-sm font-black text-cosmos">Nível</th>
+              <th className="pb-3 text-sm font-black text-cosmos">Ofensiva</th>
+              <th className="pb-3 text-sm font-black text-cosmos">Presença</th>
+              <th className="pb-3 text-sm font-black text-cosmos">Status</th>
+              <th className="pb-3 text-right text-sm font-black text-cosmos">Ações</th>
             </tr>
           </thead>
 
           <tbody>
             {visibleStudents.map((student) => (
-              <tr key={student.id} className="border-b-2 border-[#083344]/10">
-                <td className="py-4 font-bold text-[#083344]">{student.name}</td>
+              <tr key={student.id} className="border-b-2 border-cosmos/10">
+                <td className="py-4 font-bold text-cosmos">{student.name}</td>
 
                 <td className="py-4">
-                  <span className="rounded-full border-2 border-[#083344] bg-[#FDF6E3] px-2.5 py-0.5 text-xs font-bold text-[#083344]">
+                  <span className="rounded-full border-2 border-cosmos bg-varden px-2.5 py-0.5 text-xs font-bold text-cosmos">
                     {student.level}
                   </span>
                 </td>
 
                 <td className="py-4">
-                  <span className="flex items-center gap-1.5 font-bold text-[#083344]">
+                  <span className="flex items-center gap-1.5 font-bold text-cosmos">
                     <Flame
                       className={`size-4 ${
-                        student.streak === 0 ? "text-[#BE1622]" : "text-[#083344]/60"
+                        student.streak === 0 ? "text-crimson" : "text-cosmos/60"
                       }`}
                       strokeWidth={2.5}
                       aria-hidden="true"
@@ -145,14 +145,14 @@ export default function AdminStudentsPage() {
                   </span>
                 </td>
 
-                <td className="py-4 font-bold text-[#083344]">{student.attendance}%</td>
+                <td className="py-4 font-bold text-cosmos">{student.attendance}%</td>
 
                 <td className="py-4">
                   <span
                     className={`rounded-full border-2 px-2.5 py-0.5 text-xs font-bold ${
                       student.status === "active"
-                        ? "border-emerald-700 bg-emerald-100 text-emerald-800"
-                        : "border-[#BE1622] bg-red-50 text-[#BE1622]"
+                        ? "border-marble bg-marble/20 text-cosmos"
+                        : "border-crimson bg-gochujang/10 text-crimson"
                     }`}
                   >
                     {student.status === "active" ? "Ativo" : "Risco de Evasão"}
@@ -164,7 +164,7 @@ export default function AdminStudentsPage() {
                     <button
                       type="button"
                       aria-label={`Editar ${student.name}`}
-                      className="grid size-9 place-items-center rounded-lg border-2 border-[#083344] bg-white text-[#083344] shadow-[2px_2px_0_0_#083344] transition-all active:translate-y-0.5 active:shadow-none"
+                      className="grid size-9 place-items-center rounded-lg border-2 border-cosmos bg-white text-cosmos shadow-[2px_2px_0_0_var(--color-cosmos)] transition-all active:translate-y-0.5 active:shadow-none"
                     >
                       <Pencil className="size-4" strokeWidth={2.5} aria-hidden="true" />
                     </button>
@@ -172,7 +172,7 @@ export default function AdminStudentsPage() {
                     <button
                       type="button"
                       aria-label={`Ver perfil de ${student.name}`}
-                      className="grid size-9 place-items-center rounded-lg border-2 border-[#083344] bg-white text-[#083344] shadow-[2px_2px_0_0_#083344] transition-all active:translate-y-0.5 active:shadow-none"
+                      className="grid size-9 place-items-center rounded-lg border-2 border-cosmos bg-white text-cosmos shadow-[2px_2px_0_0_var(--color-cosmos)] transition-all active:translate-y-0.5 active:shadow-none"
                     >
                       <Eye className="size-4" strokeWidth={2.5} aria-hidden="true" />
                     </button>
@@ -184,7 +184,7 @@ export default function AdminStudentsPage() {
         </table>
 
         {visibleStudents.length === 0 && (
-          <p className="py-8 text-center text-sm font-bold text-[#083344]/50">
+          <p className="py-8 text-center text-sm font-bold text-cosmos/50">
             Nenhum aluno encontrado com esses filtros.
           </p>
         )}

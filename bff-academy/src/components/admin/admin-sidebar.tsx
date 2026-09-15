@@ -6,6 +6,7 @@ import {
   LayoutDashboard,
   Users,
   GraduationCap,
+  UserCheck,
   BookOpen,
   Wallet,
   BarChart3,
@@ -23,6 +24,7 @@ const navItems: ReadonlyArray<AdminNavItem> = [
   { href: "/admin", label: "Dashboard", icon: LayoutDashboard },
   { href: "/admin/alunos", label: "Alunos", icon: Users },
   { href: "/admin/professores", label: "Professores", icon: GraduationCap },
+  { href: "/admin/teachers/approvals", label: "Solicitações", icon: UserCheck },
   { href: "/admin/conteudo", label: "Turmas & Conteúdo", icon: BookOpen },
   { href: "/admin/financeiro", label: "Financeiro", icon: Wallet },
   { href: "/admin/relatorios", label: "Relatórios", icon: BarChart3 },
@@ -32,13 +34,13 @@ export function AdminSidebar() {
   const pathname = usePathname()
 
   return (
-    <aside className="fixed flex h-screen w-64 flex-col gap-4 border-r-[3px] border-[#083344] bg-white p-4">
+    <aside className="fixed flex h-screen w-64 flex-col gap-4 border-r-[3px] border-cosmos bg-white p-4">
       {/* Logo */}
       <div className="flex items-center gap-2 px-2 py-3">
-        <span className="grid size-9 place-items-center rounded-xl border-[3px] border-[#083344] bg-[#BE1622] text-sm font-black text-white">
+        <span className="grid size-9 place-items-center rounded-xl border-[3px] border-cosmos bg-crimson text-sm font-black text-white">
           BFF
         </span>
-        <span className="font-black text-[#083344]">Academy</span>
+        <span className="font-black text-cosmos">Academy</span>
       </div>
 
       {/* Navegação */}
@@ -54,8 +56,8 @@ export function AdminSidebar() {
               aria-current={isActive ? "page" : undefined}
               className={`flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-bold transition-all ${
                 isActive
-                  ? "border-2 border-[#083344] bg-[#FDF6E3] text-[#083344]"
-                  : "border-2 border-transparent text-[#083344]/70 hover:bg-[#083344]/10 hover:text-[#083344]"
+                  ? "border-2 border-cosmos bg-varden text-cosmos"
+                  : "border-2 border-transparent text-cosmos/70 hover:bg-cosmos/10 hover:text-cosmos"
               }`}
             >
               <Icon className="size-5 shrink-0" strokeWidth={2.5} aria-hidden="true" />
@@ -68,7 +70,7 @@ export function AdminSidebar() {
       {/* Logout */}
       <button
         type="button"
-        className="mt-auto flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-bold text-[#BE1622] transition-all hover:bg-[#BE1622]/10"
+        className="mt-auto flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-bold text-crimson transition-all hover:bg-crimson/10"
       >
         <LogOut className="size-5 shrink-0" strokeWidth={2.5} aria-hidden="true" />
         Sair da Conta

@@ -69,14 +69,14 @@ export function LiveClassView({
   }
 
   const controlButtonBase =
-    "grid size-11 place-items-center rounded-full border-[3px] border-[#083344] transition-all active:translate-y-0.5"
+    "grid size-11 place-items-center rounded-full border-[3px] border-cosmos transition-all active:translate-y-0.5"
 
   return (
-    <main className="flex h-screen flex-col gap-4 bg-[#FDF6E3] p-4 lg:flex-row">
+    <main className="flex h-screen flex-col gap-4 bg-varden p-4 lg:flex-row">
       {/* Player de vídeo */}
-      <section className="relative flex min-h-0 flex-1 flex-col items-center justify-center overflow-hidden rounded-3xl border-4 border-[#083344] bg-slate-800 shadow-[6px_6px_0_0_#083344]">
+      <section className="relative flex min-h-0 flex-1 flex-col items-center justify-center overflow-hidden rounded-3xl border-4 border-cosmos bg-cosmos shadow-[6px_6px_0_0_var(--color-cosmos)]">
         {/* Badge ao vivo */}
-        <div className="absolute left-4 top-4 flex items-center gap-2 rounded-full border-[3px] border-[#083344] bg-[#BE1622] px-3 py-1.5 shadow-[2px_2px_0_0_#083344]">
+        <div className="absolute left-4 top-4 flex items-center gap-2 rounded-full border-[3px] border-cosmos bg-crimson px-3 py-1.5 shadow-[2px_2px_0_0_var(--color-cosmos)]">
           <span
             className="size-2 animate-pulse rounded-full bg-white"
             aria-hidden="true"
@@ -88,21 +88,21 @@ export function LiveClassView({
 
         {/* Professor */}
         <div className="flex flex-col items-center gap-3">
-          <div className="grid size-28 place-items-center rounded-full border-4 border-[#083344] bg-[#FDF6E3] shadow-[4px_4px_0_0_#083344]">
-            <User className="size-14 text-[#083344]" strokeWidth={2.5} aria-hidden="true" />
+          <div className="grid size-28 place-items-center rounded-full border-4 border-cosmos bg-varden shadow-[4px_4px_0_0_var(--color-cosmos)]">
+            <User className="size-14 text-cosmos" strokeWidth={2.5} aria-hidden="true" />
           </div>
           <p className="text-xl font-black text-white">{teacherName}</p>
         </div>
 
         {/* Controles de mídia */}
-        <div className="absolute bottom-6 flex items-center gap-4 rounded-full border-[3px] border-[#083344] bg-white px-6 py-3 shadow-[4px_4px_0_0_#083344]">
+        <div className="absolute bottom-6 flex items-center gap-4 rounded-full border-[3px] border-cosmos bg-white px-6 py-3 shadow-[4px_4px_0_0_var(--color-cosmos)]">
           <button
             type="button"
             onClick={() => setIsMuted((current) => !current)}
             aria-pressed={isMuted}
             aria-label={isMuted ? "Ativar microfone" : "Desativar microfone"}
             className={`${controlButtonBase} ${
-              isMuted ? "bg-[#BE1622] text-white" : "bg-white text-[#083344]"
+              isMuted ? "bg-crimson text-white" : "bg-white text-cosmos"
             }`}
           >
             {isMuted ? (
@@ -118,7 +118,7 @@ export function LiveClassView({
             aria-pressed={isCameraOff}
             aria-label={isCameraOff ? "Ligar câmera" : "Desligar câmera"}
             className={`${controlButtonBase} ${
-              isCameraOff ? "bg-[#BE1622] text-white" : "bg-white text-[#083344]"
+              isCameraOff ? "bg-crimson text-white" : "bg-white text-cosmos"
             }`}
           >
             {isCameraOff ? (
@@ -134,7 +134,7 @@ export function LiveClassView({
             aria-pressed={hasRaisedHand}
             aria-label={hasRaisedHand ? "Abaixar a mão" : "Levantar a mão"}
             className={`${controlButtonBase} ${
-              hasRaisedHand ? "bg-[#FDD835] text-[#083344]" : "bg-white text-[#083344]"
+              hasRaisedHand ? "bg-marble text-cosmos" : "bg-white text-cosmos"
             }`}
           >
             <Hand className="size-5" strokeWidth={2.5} aria-hidden="true" />
@@ -144,7 +144,7 @@ export function LiveClassView({
             type="button"
             onClick={onLeave}
             aria-label="Sair da aula"
-            className={`${controlButtonBase} bg-[#BE1622] text-white`}
+            className={`${controlButtonBase} bg-crimson text-white`}
           >
             <PhoneOff className="size-5" strokeWidth={2.5} aria-hidden="true" />
           </button>
@@ -152,9 +152,9 @@ export function LiveClassView({
       </section>
 
       {/* Chat */}
-      <section className="flex h-[50vh] w-full flex-col overflow-hidden rounded-3xl border-[3px] border-[#083344] bg-white shadow-[4px_4px_0_0_#083344] lg:h-full lg:w-96">
-        <header className="border-b-[3px] border-[#083344] px-5 py-4">
-          <h2 className="font-black text-[#083344]">Chat da Turma</h2>
+      <section className="flex h-[50vh] w-full flex-col overflow-hidden rounded-3xl border-[3px] border-cosmos bg-white shadow-[4px_4px_0_0_var(--color-cosmos)] lg:h-full lg:w-96">
+        <header className="border-b-[3px] border-cosmos px-5 py-4">
+          <h2 className="font-black text-cosmos">Chat da Turma</h2>
         </header>
 
         {/* Mensagens */}
@@ -164,18 +164,18 @@ export function LiveClassView({
               key={message.id}
               className={`rounded-xl border-2 p-3 ${
                 message.isTeacher
-                  ? "border-[#083344] bg-[#FDF6E3]"
-                  : "border-[#083344]/20 bg-white"
+                  ? "border-cosmos bg-varden"
+                  : "border-cosmos/20 bg-white"
               }`}
             >
               <p
                 className={`text-xs font-black ${
-                  message.isTeacher ? "text-[#BE1622]" : "text-[#083344]/60"
+                  message.isTeacher ? "text-crimson" : "text-cosmos/60"
                 }`}
               >
                 {message.author}
               </p>
-              <p className="mt-1 text-sm font-medium text-[#083344]">{message.text}</p>
+              <p className="mt-1 text-sm font-medium text-cosmos">{message.text}</p>
             </article>
           ))}
         </div>
@@ -183,7 +183,7 @@ export function LiveClassView({
         {/* Envio */}
         <form
           onSubmit={sendMessage}
-          className="flex items-center gap-2 border-t-[3px] border-[#083344] p-3"
+          className="flex items-center gap-2 border-t-[3px] border-cosmos p-3"
         >
           <input
             type="text"
@@ -191,13 +191,13 @@ export function LiveClassView({
             onChange={(event) => setDraft(event.target.value)}
             placeholder="Escreva uma mensagem..."
             aria-label="Mensagem para o chat da turma"
-            className="min-w-0 flex-1 rounded-xl border-2 border-[#083344] bg-[#FDF6E3] px-3 py-2.5 text-sm font-medium text-[#083344] outline-none placeholder:text-[#083344]/40 focus:border-[#BE1622]"
+            className="min-w-0 flex-1 rounded-xl border-2 border-cosmos bg-varden px-3 py-2.5 text-sm font-medium text-cosmos outline-none placeholder:text-cosmos/40 focus:border-crimson"
           />
 
           <button
             type="submit"
             aria-label="Enviar mensagem"
-            className="grid size-11 shrink-0 place-items-center rounded-xl border-[3px] border-[#083344] bg-[#083344] text-white transition-all active:translate-y-0.5"
+            className="grid size-11 shrink-0 place-items-center rounded-xl border-[3px] border-cosmos bg-cosmos text-white transition-all active:translate-y-0.5"
           >
             <Send className="size-5" strokeWidth={2.5} aria-hidden="true" />
           </button>

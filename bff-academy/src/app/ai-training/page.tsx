@@ -114,34 +114,34 @@ export default function AiTrainingPage() {
   const hasEnergy = energy > 0
 
   return (
-    <main className="flex min-h-screen flex-col bg-[#FDF6E3] px-4 pb-8 pt-8">
+    <main className="flex min-h-screen flex-col bg-varden px-4 pb-8 pt-8">
       <button
         type="button"
         onClick={() => router.back()}
         aria-label="Voltar"
-        className="mb-4 grid size-10 place-items-center rounded-xl text-[#083344] transition-all hover:bg-[#083344]/10 active:scale-95"
+        className="mb-4 grid size-10 place-items-center rounded-xl text-cosmos transition-all hover:bg-cosmos/10 active:scale-95"
       >
         <ArrowLeft className="size-6" strokeWidth={2.5} aria-hidden="true" />
       </button>
 
       <header className="mb-4 flex flex-col gap-4">
-        <h1 className="text-2xl font-black text-[#083344]">
+        <h1 className="text-2xl font-black text-cosmos">
           Simulador: Entrevista de Emprego
         </h1>
 
         <div className="flex flex-wrap items-center gap-3">
-          <div className="flex items-center gap-2 rounded-2xl border-[3px] border-[#083344] bg-white px-4 py-2.5 shadow-[3px_3px_0_0_#083344]">
+          <div className="flex items-center gap-2 rounded-2xl border-[3px] border-cosmos bg-white px-4 py-2.5 shadow-[3px_3px_0_0_var(--color-cosmos)]">
             <Zap
-              className="size-5 fill-[#FDD835] text-[#FDD835]"
+              className="size-5 fill-marble text-marble"
               strokeWidth={2.5}
               aria-hidden="true"
             />
-            <p className="text-sm font-black text-[#083344]">
+            <p className="text-sm font-black text-cosmos">
                Energia: {energy}/{MAX_ENERGY}
             </p>
           </div>
 
-          <fieldset className="flex rounded-full border-[3px] border-[#083344] bg-white p-1 shadow-[3px_3px_0_0_#083344]">
+          <fieldset className="flex rounded-full border-[3px] border-cosmos bg-white p-1 shadow-[3px_3px_0_0_var(--color-cosmos)]">
             <legend className="sr-only">Nível de dificuldade</legend>
             <button
               type="button"
@@ -149,8 +149,8 @@ export default function AiTrainingPage() {
               aria-pressed={level === "iniciante"}
               className={`rounded-full px-4 py-1.5 text-sm font-bold transition-all ${
                 level === "iniciante"
-                  ? "bg-[#083344] text-white"
-                  : "bg-transparent text-[#083344]/60"
+                  ? "bg-cosmos text-white"
+                  : "bg-transparent text-cosmos/60"
               }`}
             >
               Iniciante
@@ -161,8 +161,8 @@ export default function AiTrainingPage() {
               aria-pressed={level === "avancado"}
               className={`rounded-full px-4 py-1.5 text-sm font-bold transition-all ${
                 level === "avancado"
-                  ? "bg-[#083344] text-white"
-                  : "bg-transparent text-[#083344]/60"
+                  ? "bg-cosmos text-white"
+                  : "bg-transparent text-cosmos/60"
               }`}
             >
               Avançado
@@ -175,7 +175,7 @@ export default function AiTrainingPage() {
       <section
         ref={chatRef}
         aria-label="Conversa com a IA"
-        className="mb-4 flex h-[55vh] flex-col gap-4 overflow-y-auto rounded-3xl border-[3px] border-[#083344] bg-white p-5 shadow-[6px_6px_0_0_#083344]"
+        className="mb-4 flex h-[55vh] flex-col gap-4 overflow-y-auto rounded-3xl border-[3px] border-cosmos bg-white p-5 shadow-[6px_6px_0_0_var(--color-cosmos)]"
       >
         {messages.map((message) => {
           const isUser = message.author === "user"
@@ -188,16 +188,16 @@ export default function AiTrainingPage() {
               }`}
             >
               {!isUser && (
-                <span className="grid size-8 shrink-0 place-items-center rounded-full border-2 border-[#083344] bg-[#FDF6E3]">
-                  <Bot className="size-4 text-[#083344]" strokeWidth={2.5} aria-hidden="true" />
+                <span className="grid size-8 shrink-0 place-items-center rounded-full border-2 border-cosmos bg-varden">
+                  <Bot className="size-4 text-cosmos" strokeWidth={2.5} aria-hidden="true" />
                 </span>
               )}
 
               <p
-                className={`rounded-2xl border-2 border-[#083344] px-4 py-2.5 text-sm font-medium ${
+                className={`rounded-2xl border-2 border-cosmos px-4 py-2.5 text-sm font-medium ${
                   isUser
-                    ? "bg-[#083344] text-white"
-                    : "bg-neutral-100 text-[#083344]"
+                    ? "bg-cosmos text-white"
+                    : "bg-neutral-100 text-cosmos"
                 }`}
               >
                 {message.text}
@@ -207,7 +207,7 @@ export default function AiTrainingPage() {
         })}
 
         {isRecording && (
-          <p className="text-center text-xs font-bold text-[#BE1622]">
+          <p className="text-center text-xs font-bold text-crimson">
             Gravando... solte para enviar
           </p>
         )}
@@ -221,7 +221,7 @@ export default function AiTrainingPage() {
               key={suggestion}
               type="button"
               onClick={() => setDraft(suggestion)}
-              className="rounded-full border-2 border-[#083344] bg-white px-3 py-1.5 text-xs font-bold text-[#083344] shadow-[2px_2px_0_0_#083344] transition-all active:translate-y-0.5 active:shadow-none"
+              className="rounded-full border-2 border-cosmos bg-white px-3 py-1.5 text-xs font-bold text-cosmos shadow-[2px_2px_0_0_var(--color-cosmos)] transition-all active:translate-y-0.5 active:shadow-none"
             >
               {suggestion}
             </button>
@@ -239,7 +239,7 @@ export default function AiTrainingPage() {
             onPointerCancel={handleMicCancel}
             aria-label={isRecording ? "Parar gravação" : "Gravar resposta"}
             aria-pressed={isRecording}
-            className={`grid size-12 shrink-0 place-items-center rounded-full border-[3px] border-[#083344] bg-[#BE1622] text-white shadow-[3px_3px_0_0_#083344] transition-all select-none ${
+            className={`grid size-12 shrink-0 place-items-center rounded-full border-[3px] border-cosmos bg-crimson text-white shadow-[3px_3px_0_0_var(--color-cosmos)] transition-all select-none ${
               isRecording ? "animate-pulse" : "active:translate-y-0.5 active:shadow-none"
             }`}
           >
@@ -252,26 +252,26 @@ export default function AiTrainingPage() {
             onChange={(event) => setDraft(event.target.value)}
             placeholder="Escreva sua resposta em inglês..."
             aria-label="Sua resposta"
-            className="min-w-0 flex-1 rounded-xl border-[3px] border-[#083344] bg-white px-4 py-3 text-sm font-medium text-[#083344] shadow-[3px_3px_0_0_#083344] outline-none placeholder:text-[#083344]/40 focus:border-[#BE1622]"
+            className="min-w-0 flex-1 rounded-xl border-[3px] border-cosmos bg-white px-4 py-3 text-sm font-medium text-cosmos shadow-[3px_3px_0_0_var(--color-cosmos)] outline-none placeholder:text-cosmos/40 focus:border-crimson"
           />
 
           <button
             type="submit"
             aria-label="Enviar mensagem"
             disabled={!draft.trim()}
-            className="grid size-12 shrink-0 place-items-center rounded-xl border-[3px] border-[#083344] bg-[#083344] text-white shadow-[3px_3px_0_0_#083344] transition-all active:translate-y-0.5 active:shadow-none disabled:cursor-not-allowed disabled:opacity-40 disabled:shadow-none"
+            className="grid size-12 shrink-0 place-items-center rounded-xl border-[3px] border-cosmos bg-cosmos text-white shadow-[3px_3px_0_0_var(--color-cosmos)] transition-all active:translate-y-0.5 active:shadow-none disabled:cursor-not-allowed disabled:opacity-40 disabled:shadow-none"
           >
             <Send className="size-5" strokeWidth={2.5} aria-hidden="true" />
           </button>
         </form>
       ) : (
-        <div className="flex gap-3 rounded-2xl border-[3px] border-[#BE1622] bg-red-50 p-4">
+        <div className="flex gap-3 rounded-2xl border-[3px] border-crimson bg-gochujang/10 p-4">
           <Zap
-            className="size-6 shrink-0 fill-[#BE1622] text-[#BE1622]"
+            className="size-6 shrink-0 fill-crimson text-crimson"
             strokeWidth={2.5}
             aria-hidden="true"
           />
-          <p className="text-sm font-bold text-[#BE1622]">
+          <p className="text-sm font-bold text-crimson">
             ⚡ Você gastou toda a sua energia de hoje! Volte amanhã ou complete missões
             para recarregar.
           </p>

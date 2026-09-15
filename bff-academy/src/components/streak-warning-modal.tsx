@@ -48,11 +48,11 @@ export function StreakWarningModal({
         className="absolute inset-0 cursor-default"
       />
 
-      <div className="relative flex w-full max-w-sm flex-col items-center gap-4 rounded-4xl border-4 border-[#083344] bg-[#FDF6E3] p-6 text-center shadow-[8px_8px_0_0_#083344]">
+      <div className="relative flex w-full max-w-sm flex-col items-center gap-4 rounded-4xl border-4 border-cosmos bg-varden p-6 text-center shadow-[8px_8px_0_0_var(--color-cosmos)]">
         {/* Ícone de urgência */}
-        <div className="flex size-20 items-center justify-center rounded-full border-[3px] border-[#083344] bg-[#BE1622]/10">
+        <div className="flex size-20 items-center justify-center rounded-full border-[3px] border-cosmos bg-crimson/10">
           <Flame
-            className="size-10 animate-pulse fill-[#BE1622] text-[#BE1622]"
+            className="size-10 animate-pulse fill-crimson text-crimson"
             strokeWidth={2}
             aria-hidden="true"
           />
@@ -60,10 +60,10 @@ export function StreakWarningModal({
 
         {/* Textos */}
         <div className="flex flex-col gap-2">
-          <h2 id="streak-warning-title" className="text-2xl font-black text-[#083344]">
+          <h2 id="streak-warning-title" className="text-2xl font-black text-cosmos">
             Sua Ofensiva está em perigo!
           </h2>
-          <p className="text-sm font-medium text-[#083344]/80">
+          <p className="text-sm font-medium text-cosmos/80">
             Você está há {streakDays} dias seguidos estudando. Faça uma lição agora para não
             zerar seu progresso!
           </p>
@@ -74,7 +74,7 @@ export function StreakWarningModal({
           <button
             type="button"
             onClick={onSaveStreak}
-            className="w-full rounded-2xl border-[3px] border-[#083344] bg-[#BE1622] px-4 py-3.5 font-black text-white shadow-[4px_4px_0_0_#083344] transition-all active:translate-y-1 active:shadow-none"
+            className="w-full rounded-2xl border-[3px] border-cosmos bg-crimson px-4 py-3.5 font-black text-white shadow-[4px_4px_0_0_var(--color-cosmos)] transition-all active:translate-y-1 active:shadow-none"
           >
             Salvar minha Ofensiva
           </button>
@@ -82,7 +82,7 @@ export function StreakWarningModal({
           <button
             type="button"
             onClick={onClose}
-            className="w-full bg-transparent py-2 font-bold text-[#083344]/60 transition-all hover:text-[#083344]"
+            className="w-full bg-transparent py-2 font-bold text-cosmos/60 transition-all hover:text-cosmos"
           >
             Talvez mais tarde
           </button>

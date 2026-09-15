@@ -20,7 +20,7 @@ const mockAchievements: ReadonlyArray<Achievement> = [
     total: 7,
     unlocked: true,
     icon: Flame,
-    circleColor: "bg-[#BE1622]",
+    circleColor: "bg-crimson",
   },
   {
     id: "xp-500",
@@ -29,7 +29,7 @@ const mockAchievements: ReadonlyArray<Achievement> = [
     total: 500,
     unlocked: true,
     icon: Zap,
-    circleColor: "bg-[#5F9EA0]",
+    circleColor: "bg-marble",
   },
   {
     id: "perfect-lesson",
@@ -38,7 +38,7 @@ const mockAchievements: ReadonlyArray<Achievement> = [
     total: 1,
     unlocked: true,
     icon: Star,
-    circleColor: "bg-yellow-500",
+    circleColor: "bg-marble",
   },
   {
     id: "speaking-10",
@@ -80,10 +80,10 @@ export function AchievementsView({
     <section aria-labelledby="achievements-title">
       {/* Header */}
       <header className="mb-4 flex items-center gap-3">
-        <div className="grid size-10 place-items-center rounded-xl border-[3px] border-[#083344] bg-[#BE1622] shadow-[2px_2px_0_0_#083344]">
+        <div className="grid size-10 place-items-center rounded-xl border-[3px] border-cosmos bg-crimson shadow-[2px_2px_0_0_var(--color-cosmos)]">
           <Award className="size-5 text-white" strokeWidth={2.5} aria-hidden="true" />
         </div>
-        <h2 id="achievements-title" className="text-xl font-black text-[#083344]">
+        <h2 id="achievements-title" className="text-xl font-black text-cosmos">
           Minhas Conquistas
         </h2>
       </header>
@@ -101,17 +101,17 @@ export function AchievementsView({
           return (
             <li key={achievement.id}>
               <article
-                className={`flex h-full flex-col items-center gap-2 rounded-3xl border-[3px] border-[#083344] bg-white p-4 text-center ${
-                  achievement.unlocked ? "shadow-[4px_4px_0_0_#083344]" : ""
+                className={`flex h-full flex-col items-center gap-2 rounded-3xl border-[3px] border-cosmos bg-white p-4 text-center ${
+                  achievement.unlocked ? "shadow-[4px_4px_0_0_var(--color-cosmos)]" : ""
                 }`}
               >
                 {/* Icon Circle */}
                 <div
-                  className={`flex size-14 items-center justify-center rounded-full border-[3px] border-[#083344] ${achievement.circleColor}`}
+                  className={`flex size-14 items-center justify-center rounded-full border-[3px] border-cosmos ${achievement.circleColor}`}
                 >
                   <Icon
                     className={`size-6 ${
-                      achievement.unlocked ? "text-white" : "text-gray-500"
+                    achievement.unlocked ? "text-varden" : "text-cosmos/40"
                     }`}
                     strokeWidth={2.5}
                     aria-hidden="true"
@@ -121,7 +121,7 @@ export function AchievementsView({
                 {/* Title */}
                 <h3
                   className={`text-sm leading-snug text-balance ${
-                    achievement.unlocked ? "font-bold text-[#083344]" : "font-bold text-gray-500"
+                    achievement.unlocked ? "font-bold text-cosmos" : "font-bold text-cosmos/40"
                   }`}
                 >
                   {achievement.title}
@@ -129,25 +129,25 @@ export function AchievementsView({
 
                 {/* Progress */}
                 {achievement.unlocked ? (
-                  <span className="mt-auto rounded-full border-2 border-[#083344] bg-[#FDF6E3] px-3 py-0.5 text-xs font-bold text-[#083344]">
+                  <span className="mt-auto rounded-full border-2 border-cosmos bg-varden px-3 py-0.5 text-xs font-bold text-cosmos">
                     Desbloqueada!
                   </span>
                 ) : (
                   <div className="mt-auto flex w-full flex-col gap-1.5 pt-1">
-                    <div className="relative h-3 w-full overflow-hidden rounded-full border-2 border-[#083344] bg-white">
+                    <div className="relative h-3 w-full overflow-hidden rounded-full border-2 border-cosmos bg-white">
                       <progress
-                        className="absolute inset-0 h-full w-full appearance-none [&::-webkit-progress-bar]:bg-transparent [&::-webkit-progress-value]:bg-[#5F9EA0] [&::-moz-progress-bar]:bg-[#5F9EA0]"
+                        className="absolute inset-0 h-full w-full appearance-none [&::-webkit-progress-bar]:bg-transparent [&::-webkit-progress-value]:bg-marble [&::-moz-progress-bar]:bg-marble"
                         value={achievement.progress}
                         max={achievement.total}
                         aria-label={`Progresso: ${progressLabel}`}
                       />
                       <div
-                        className="absolute inset-0 h-full bg-[#5F9EA0]"
+                        className="absolute inset-0 h-full bg-marble"
                         style={{ width: `${progressPercent}%` }}
                         aria-hidden="true"
                       />
                     </div>
-                    <span className="text-xs font-bold text-gray-500">{progressLabel}</span>
+                    <span className="text-xs font-bold text-cosmos/40">{progressLabel}</span>
                   </div>
                 )}
               </article>

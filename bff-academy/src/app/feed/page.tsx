@@ -31,7 +31,7 @@ const mockPosts: ReadonlyArray<Post> = [
       "Galera, na próxima sexta teremos Speaking Club aberto às 19h com a Teacher Sarah! Tema: viagens e aeroporto. Não precisa se inscrever, é só entrar pelo app.",
     badge: {
       text: "📢 Aviso oficial",
-      className: "border-[#083344] bg-[#E8F1F5] text-[#083344]",
+      className: "border-cosmos bg-marble/20 text-cosmos",
     },
     likes: 42,
     comments: 8,
@@ -44,7 +44,7 @@ const mockPosts: ReadonlyArray<Post> = [
       "Finalmente cheguei no Nível 4! Confesso que o Present Perfect me quebrou por umas duas semanas, mas depois que caiu a ficha ficou tranquilo. Insistam, gente!",
     badge: {
       text: "🚀 Subiu para o Nível 4",
-      className: "border-[#083344] bg-[#FDECEC] text-[#BE1622]",
+      className: "border-cosmos bg-crimson/10 text-crimson",
     },
     likes: 27,
     comments: 12,
@@ -66,7 +66,7 @@ const mockPosts: ReadonlyArray<Post> = [
       "10 dias seguidos estudando sem falhar nenhum! Coloquei o app pra tocar às 8h da manhã e virou parte da rotina do café.",
     badge: {
       text: "🔥 Completou 10 dias de ofensiva!",
-      className: "border-[#083344] bg-[#FDECEC] text-[#BE1622]",
+      className: "border-cosmos bg-crimson/10 text-crimson",
     },
     likes: 58,
     comments: 6,
@@ -78,8 +78,8 @@ function PostAvatar({ src, author }: { readonly src?: string; readonly author: s
 
   if (!src || hasError) {
     return (
-      <div className="grid size-12 shrink-0 place-items-center rounded-full border-[3px] border-[#083344] bg-[#5F9EA0]/20">
-        <User className="size-6 text-[#083344]" strokeWidth={2.5} aria-hidden="true" />
+      <div className="grid size-12 shrink-0 place-items-center rounded-full border-[3px] border-cosmos bg-marble/20">
+        <User className="size-6 text-cosmos" strokeWidth={2.5} aria-hidden="true" />
       </div>
     )
   }
@@ -90,7 +90,7 @@ function PostAvatar({ src, author }: { readonly src?: string; readonly author: s
       alt={`Avatar de ${author}`}
       width={48}
       height={48}
-      className="size-12 shrink-0 rounded-full border-[3px] border-[#083344] bg-white object-cover"
+      className="size-12 shrink-0 rounded-full border-[3px] border-cosmos bg-white object-cover"
       onError={() => setHasError(true)}
     />
   )
@@ -102,13 +102,13 @@ function PostCard({ post }: { readonly post: Post }) {
   const likeCount = isLiked ? post.likes + 1 : post.likes
 
   return (
-    <article className="mb-6 rounded-3xl border-[3px] border-[#083344] bg-white p-5 shadow-[4px_4px_0_0_#083344]">
+    <article className="mb-6 rounded-3xl border-[3px] border-cosmos bg-white p-5 shadow-[4px_4px_0_0_var(--color-cosmos)]">
       {/* Cabeçalho */}
       <header className="flex items-center gap-3">
         <PostAvatar src={post.avatarUrl} author={post.author} />
         <div className="min-w-0">
-          <p className="truncate font-bold text-[#083344]">{post.author}</p>
-          <p className="text-xs text-[#083344]/60">{post.timeAgo}</p>
+          <p className="truncate font-bold text-cosmos">{post.author}</p>
+          <p className="text-xs text-cosmos/60">{post.timeAgo}</p>
         </div>
       </header>
 
@@ -121,22 +121,22 @@ function PostCard({ post }: { readonly post: Post }) {
         </span>
       )}
 
-      <p className="mt-3 text-[#083344]">{post.content}</p>
+      <p className="mt-3 text-cosmos">{post.content}</p>
 
       {/* Rodapé de ações */}
-      <div className="my-3 border-t-2 border-[#083344]/10" />
+      <div className="my-3 border-t-2 border-cosmos/10" />
 
       <div className="flex items-center gap-6">
         <button
           type="button"
           onClick={() => setIsLiked((liked) => !liked)}
           aria-pressed={isLiked}
-          className={`flex items-center gap-2 font-bold transition-all active:scale-95 hover:text-[#BE1622] ${
-            isLiked ? "text-[#BE1622]" : "text-[#083344]"
+          className={`flex items-center gap-2 font-bold transition-all active:scale-95 hover:text-crimson ${
+            isLiked ? "text-crimson" : "text-cosmos"
           }`}
         >
           <Heart
-            className={`size-5 ${isLiked ? "fill-[#BE1622]" : ""}`}
+            className={`size-5 ${isLiked ? "fill-crimson" : ""}`}
             strokeWidth={2.5}
             aria-hidden="true"
           />
@@ -145,7 +145,7 @@ function PostCard({ post }: { readonly post: Post }) {
 
         <button
           type="button"
-          className="flex items-center gap-2 font-bold text-[#083344] transition-all hover:text-[#5F9EA0] active:scale-95"
+          className="flex items-center gap-2 font-bold text-cosmos transition-all hover:text-marble active:scale-95"
         >
           <MessageSquare className="size-5" strokeWidth={2.5} aria-hidden="true" />
           <span className="text-sm">{post.comments}</span>
@@ -157,8 +157,8 @@ function PostCard({ post }: { readonly post: Post }) {
 
 export default function FeedPage() {
   return (
-    <main className="flex min-h-screen flex-col bg-[#FDF6E3] px-4 pb-28 pt-8">
-      <h1 className="mb-6 text-2xl font-black text-[#083344]">Comunidade</h1>
+    <main className="flex min-h-screen flex-col bg-varden px-4 pb-28 pt-8">
+      <h1 className="mb-6 text-2xl font-black text-cosmos">Comunidade</h1>
 
       <section aria-label="Publicações da comunidade">
         {mockPosts.map((post) => (

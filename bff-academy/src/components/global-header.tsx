@@ -78,7 +78,7 @@ export function GlobalHeader({
           title="Tickets de Reposição"
         >
           <Ticket
-            className="size-5 text-yellow-500"
+            className="size-5 text-marble"
             strokeWidth={2.5}
             aria-hidden="true"
           />

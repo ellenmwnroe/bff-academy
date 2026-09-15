@@ -53,17 +53,17 @@ export default function AdminContentPage() {
         {/* Cabeçalho */}
         <header className="flex flex-wrap items-center justify-between gap-4">
           <div>
-            <h1 className="text-3xl font-black text-[#083344]">
+            <h1 className="text-3xl font-black text-cosmos">
               Gestão de Conteúdo e Turmas
             </h1>
-            <p className="mt-1 text-sm font-medium text-[#083344]/60">
+            <p className="mt-1 text-sm font-medium text-cosmos/60">
               Materiais de áudio organizados por nível do curso
             </p>
           </div>
 
           <button
             type="button"
-            className="flex items-center gap-2 rounded-xl border-[3px] border-[#083344] bg-[#083344] px-4 py-2.5 text-sm font-bold text-white shadow-[3px_3px_0_0_#083344] transition-all active:translate-y-0.5 active:shadow-none"
+            className="flex items-center gap-2 rounded-xl border-[3px] border-cosmos bg-cosmos px-4 py-2.5 text-sm font-bold text-white shadow-[3px_3px_0_0_var(--color-cosmos)] transition-all active:translate-y-0.5 active:shadow-none"
           >
             <Plus className="size-4" strokeWidth={2.5} aria-hidden="true" />
             Novo Material
@@ -76,27 +76,27 @@ export default function AdminContentPage() {
             <section
               key={level.id}
               aria-labelledby={`${level.id}-title`}
-              className="rounded-2xl border-[3px] border-[#083344] bg-white p-5 shadow-[4px_4px_0_0_#083344]"
+              className="rounded-2xl border-[3px] border-cosmos bg-white p-5 shadow-[4px_4px_0_0_var(--color-cosmos)]"
             >
               {/* Cabeçalho do nível */}
               <div className="flex items-center justify-between gap-4">
-                <h2 id={`${level.id}-title`} className="text-xl font-black text-[#083344]">
+                <h2 id={`${level.id}-title`} className="text-xl font-black text-cosmos">
                   {level.name}
                 </h2>
 
-                <span className="rounded-full border-2 border-[#083344] bg-[#FDF6E3] px-3 py-1 text-xs font-bold text-[#083344]">
+                <span className="rounded-full border-2 border-cosmos bg-varden px-3 py-1 text-xs font-bold text-cosmos">
                   {level.lessons.length}{" "}
                   {level.lessons.length === 1 ? "conteúdo" : "conteúdos"}
                 </span>
               </div>
 
-              <h3 className="mb-3 mt-5 text-sm font-black uppercase tracking-wide text-[#083344]/60">
+              <h3 className="mb-3 mt-5 text-sm font-black uppercase tracking-wide text-cosmos/60">
                 Conteúdos Cadastrados
               </h3>
 
               {/* Lições */}
               {level.lessons.length === 0 ? (
-                <p className="mb-4 text-sm font-medium text-[#083344]/50">
+                <p className="mb-4 text-sm font-medium text-cosmos/50">
                   Nenhum material cadastrado neste nível ainda.
                 </p>
               ) : (
@@ -104,19 +104,19 @@ export default function AdminContentPage() {
                   {level.lessons.map((lesson) => (
                     <li
                       key={lesson.id}
-                      className="flex items-center justify-between gap-4 rounded-xl border-2 border-[#083344] bg-[#FDF6E3] p-3"
+                      className="flex items-center justify-between gap-4 rounded-xl border-2 border-cosmos bg-varden p-3"
                     >
                       <span className="flex min-w-0 items-center gap-3">
                         <Headphones
-                          className="size-5 shrink-0 text-[#083344]"
+                          className="size-5 shrink-0 text-cosmos"
                           strokeWidth={2.5}
                           aria-hidden="true"
                         />
                         <span className="min-w-0">
-                          <span className="block truncate font-bold text-[#083344]">
+                          <span className="block truncate font-bold text-cosmos">
                             {lesson.fileName}
                           </span>
-                          <span className="text-xs font-medium text-[#083344]/60">
+                          <span className="text-xs font-medium text-cosmos/60">
                             {lesson.duration}
                           </span>
                         </span>
@@ -125,7 +125,7 @@ export default function AdminContentPage() {
                       <span className="flex shrink-0 items-center gap-2">
                         <button
                           type="button"
-                          className="flex items-center gap-1.5 rounded-lg border-2 border-[#083344] bg-white px-3 py-1.5 text-xs font-bold text-[#083344] shadow-[2px_2px_0_0_#083344] transition-all active:translate-y-0.5 active:shadow-none"
+                          className="flex items-center gap-1.5 rounded-lg border-2 border-cosmos bg-white px-3 py-1.5 text-xs font-bold text-cosmos shadow-[2px_2px_0_0_var(--color-cosmos)] transition-all active:translate-y-0.5 active:shadow-none"
                         >
                           <Play className="size-3.5" strokeWidth={2.5} aria-hidden="true" />
                           Ouvir
@@ -133,7 +133,7 @@ export default function AdminContentPage() {
 
                         <button
                           type="button"
-                          className="flex items-center gap-1.5 rounded-lg border-2 border-[#083344] bg-white px-3 py-1.5 text-xs font-bold text-[#083344] shadow-[2px_2px_0_0_#083344] transition-all active:translate-y-0.5 active:shadow-none"
+                          className="flex items-center gap-1.5 rounded-lg border-2 border-cosmos bg-white px-3 py-1.5 text-xs font-bold text-cosmos shadow-[2px_2px_0_0_var(--color-cosmos)] transition-all active:translate-y-0.5 active:shadow-none"
                         >
                           <Pencil className="size-3.5" strokeWidth={2.5} aria-hidden="true" />
                           Editar
@@ -141,7 +141,7 @@ export default function AdminContentPage() {
 
                         <button
                           type="button"
-                          className="flex items-center gap-1.5 rounded-lg border-2 border-[#083344] bg-[#BE1622] px-3 py-1.5 text-xs font-bold text-white shadow-[2px_2px_0_0_#083344] transition-all active:translate-y-0.5 active:shadow-none"
+                          className="flex items-center gap-1.5 rounded-lg border-2 border-cosmos bg-crimson px-3 py-1.5 text-xs font-bold text-white shadow-[2px_2px_0_0_var(--color-cosmos)] transition-all active:translate-y-0.5 active:shadow-none"
                         >
                           <Trash2 className="size-3.5" strokeWidth={2.5} aria-hidden="true" />
                           Excluir
@@ -155,14 +155,14 @@ export default function AdminContentPage() {
               {/* Upload rápido */}
               <button
                 type="button"
-                className="flex w-full flex-col items-center gap-2 rounded-xl border-[3px] border-dashed border-[#083344]/50 bg-white p-6 text-center transition-all hover:border-[#083344] hover:bg-[#FDF6E3]"
+                className="flex w-full flex-col items-center gap-2 rounded-xl border-[3px] border-dashed border-cosmos/50 bg-white p-6 text-center transition-all hover:border-cosmos hover:bg-varden"
               >
                 <UploadCloud
-                  className="size-7 text-[#083344]/60"
+                  className="size-7 text-cosmos/60"
                   strokeWidth={2.5}
                   aria-hidden="true"
                 />
-                <span className="text-sm font-bold text-[#083344]/70">
+                <span className="text-sm font-bold text-cosmos/70">
                   Arraste arquivos de áudio (.mp3) ou clique para fazer upload para{" "}
                   {level.name}
                 </span>

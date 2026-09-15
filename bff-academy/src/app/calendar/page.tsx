@@ -207,52 +207,52 @@ export default function CalendarPage() {
   }
 
   return (
-    <main className="flex min-h-screen flex-col bg-[#FDF6E3] px-4 pb-28 pt-8">
-      <h1 className="mb-6 text-2xl font-black text-[#083344]">Minha Agenda</h1>
+    <main className="flex min-h-screen flex-col bg-varden px-4 pb-28 pt-8">
+      <h1 className="mb-6 text-2xl font-black text-cosmos">Minha Agenda</h1>
 
       {/* Saldo de tickets */}
-      <section className="mb-4 flex items-center gap-3 rounded-2xl border-[3px] border-[#083344] bg-white p-4 shadow-[4px_4px_0_0_#083344]">
-        <div className="grid size-11 shrink-0 place-items-center rounded-xl border-[3px] border-[#083344] bg-[#FDD835]">
-          <Ticket className="size-5 text-[#083344]" strokeWidth={2.5} aria-hidden="true" />
+      <section className="mb-4 flex items-center gap-3 rounded-2xl border-[3px] border-cosmos bg-white p-4 shadow-[4px_4px_0_0_var(--color-cosmos)]">
+        <div className="grid size-11 shrink-0 place-items-center rounded-xl border-[3px] border-cosmos bg-marble">
+          <Ticket className="size-5 text-cosmos" strokeWidth={2.5} aria-hidden="true" />
         </div>
 
         <div className="min-w-0 flex-1">
-          <p className="text-lg font-black leading-tight text-[#083344]">
+          <p className="text-lg font-black leading-tight text-cosmos">
             {tickets} {tickets === 1 ? "Ticket" : "Tickets"}
           </p>
-          <p className="text-xs font-bold text-[#083344]/60">De reposição disponíveis</p>
+          <p className="text-xs font-bold text-cosmos/60">De reposição disponíveis</p>
         </div>
 
         <button
           type="button"
           onClick={() => setIsRescheduleOpen(true)}
-          className="shrink-0 rounded-xl border-[3px] border-[#083344] bg-[#083344] px-4 py-2.5 text-sm font-bold text-white transition-all active:scale-95"
+          className="shrink-0 rounded-xl border-[3px] border-cosmos bg-cosmos px-4 py-2.5 text-sm font-bold text-white transition-all active:scale-95"
         >
           Agendar reposição
         </button>
       </section>
 
       {/* Calendário */}
-      <section className="rounded-3xl border-[3px] border-[#083344] bg-white p-5 shadow-[4px_4px_0_0_#083344]">
+      <section className="rounded-3xl border-[3px] border-cosmos bg-white p-5 shadow-[4px_4px_0_0_var(--color-cosmos)]">
         {/* Navegação do mês */}
         <div className="mb-4 flex items-center justify-between">
           <button
             type="button"
             onClick={() => goToMonth(-1)}
-            className="grid size-9 place-items-center rounded-lg text-[#083344] transition-all hover:bg-[#083344]/10 active:scale-95"
+            className="grid size-9 place-items-center rounded-lg text-cosmos transition-all hover:bg-cosmos/10 active:scale-95"
             aria-label="Mês anterior"
           >
             <ChevronLeft className="size-5" strokeWidth={2.5} aria-hidden="true" />
           </button>
 
-          <p className="font-bold text-[#083344]">
+          <p className="font-bold text-cosmos">
             {MONTH_NAMES[visibleMonth.month]} {visibleMonth.year}
           </p>
 
           <button
             type="button"
             onClick={() => goToMonth(1)}
-            className="grid size-9 place-items-center rounded-lg text-[#083344] transition-all hover:bg-[#083344]/10 active:scale-95"
+            className="grid size-9 place-items-center rounded-lg text-cosmos transition-all hover:bg-cosmos/10 active:scale-95"
             aria-label="Próximo mês"
           >
             <ChevronRight className="size-5" strokeWidth={2.5} aria-hidden="true" />
@@ -264,7 +264,7 @@ export default function CalendarPage() {
           {WEEKDAY_INITIALS.map((initial, index) => (
             <span
               key={`${initial}-${index}`}
-              className="py-1 text-center text-xs font-bold text-[#083344]/50"
+              className="py-1 text-center text-xs font-bold text-cosmos/50"
             >
               {initial}
             </span>
@@ -282,15 +282,15 @@ export default function CalendarPage() {
             const dayIsSelected = day === selectedDay
             const dayHasClasses = hasClasses(day)
 
-            let dayStyles = "border-2 border-transparent text-[#083344]"
+            let dayStyles = "border-2 border-transparent text-cosmos"
             if (dayIsToday) {
-              dayStyles = "bg-[#BE1622] font-bold text-white border-2 border-transparent"
+              dayStyles = "bg-crimson font-bold text-white border-2 border-transparent"
             }
             if (dayIsSelected && !dayIsToday) {
-              dayStyles = "border-2 border-[#083344] font-bold text-[#083344]"
+              dayStyles = "border-2 border-cosmos font-bold text-cosmos"
             }
             if (dayIsSelected && dayIsToday) {
-              dayStyles = "bg-[#BE1622] font-bold text-white border-2 border-[#083344]"
+              dayStyles = "bg-crimson font-bold text-white border-2 border-cosmos"
             }
 
             return (
@@ -300,13 +300,13 @@ export default function CalendarPage() {
                 onClick={() => setSelectedDay(day)}
                 aria-pressed={dayIsSelected}
                 aria-label={`Dia ${day}${dayHasClasses ? ", com aula agendada" : ""}`}
-                className={`relative flex aspect-square flex-col items-center justify-center rounded-lg text-sm transition-all hover:bg-[#083344]/10 active:scale-95 ${dayStyles}`}
+                className={`relative flex aspect-square flex-col items-center justify-center rounded-lg text-sm transition-all hover:bg-cosmos/10 active:scale-95 ${dayStyles}`}
               >
                 {day}
                 {dayHasClasses && (
                   <span
                     className={`absolute bottom-1 size-1.5 rounded-full ${
-                      dayIsToday ? "bg-white" : "bg-[#083344]"
+                      dayIsToday ? "bg-white" : "bg-cosmos"
                     }`}
                     aria-hidden="true"
                   />
@@ -321,14 +321,14 @@ export default function CalendarPage() {
       <section aria-labelledby="scheduled-classes-title">
         <h2
           id="scheduled-classes-title"
-          className="mb-3 mt-6 text-lg font-bold text-[#083344]"
+          className="mb-3 mt-6 text-lg font-bold text-cosmos"
         >
           Aulas Programadas
         </h2>
 
         {selectedClasses.length === 0 ? (
-          <div className="rounded-xl border-[3px] border-dashed border-[#083344]/30 p-6 text-center">
-            <p className="text-sm font-bold text-[#083344]/60">
+          <div className="rounded-xl border-[3px] border-dashed border-cosmos/30 p-6 text-center">
+            <p className="text-sm font-bold text-cosmos/60">
               Nenhuma aula agendada para o dia {selectedDay}.
             </p>
           </div>
@@ -336,16 +336,16 @@ export default function CalendarPage() {
           selectedClasses.map((scheduledClass) => (
             <article
               key={scheduledClass.id}
-              className="mb-4 rounded-xl border-[3px] border-[#083344] bg-white p-4 shadow-[3px_3px_0_0_#083344]"
+              className="mb-4 rounded-xl border-[3px] border-cosmos bg-white p-4 shadow-[3px_3px_0_0_var(--color-cosmos)]"
             >
-              <span className="flex w-fit items-center gap-1.5 rounded-full border-2 border-[#083344] px-3 py-1 text-xs font-bold text-[#083344]">
+              <span className="flex w-fit items-center gap-1.5 rounded-full border-2 border-cosmos px-3 py-1 text-xs font-bold text-cosmos">
                 <Clock className="size-3.5" strokeWidth={2.5} aria-hidden="true" />
                 {scheduledClass.timeRange}
               </span>
 
               <div className="mt-3 flex flex-col gap-0.5">
-                <h3 className="text-lg font-bold text-[#083344]">{scheduledClass.title}</h3>
-                <p className="text-sm font-medium text-[#083344]/60">
+                <h3 className="text-lg font-bold text-cosmos">{scheduledClass.title}</h3>
+                <p className="text-sm font-medium text-cosmos/60">
                   {scheduledClass.teacher}
                 </p>
               </div>
@@ -353,7 +353,7 @@ export default function CalendarPage() {
               <div className="mt-4 flex gap-2">
                 <Link
                   href="/class-details"
-                  className="flex-1 rounded-xl border-[3px] border-[#083344] bg-[#083344] px-4 py-2.5 text-center text-sm font-bold text-white transition-all active:scale-95"
+                  className="flex-1 rounded-xl border-[3px] border-cosmos bg-cosmos px-4 py-2.5 text-center text-sm font-bold text-white transition-all active:scale-95"
                 >
                   Entrar na Aula
                 </Link>
@@ -361,7 +361,7 @@ export default function CalendarPage() {
                 <button
                   type="button"
                   onClick={() => setClassToCancel(scheduledClass)}
-                  className="flex items-center gap-1.5 rounded-xl border-[3px] border-[#083344] bg-white px-4 py-2.5 text-sm font-bold text-[#BE1622] transition-all active:scale-95"
+                  className="flex items-center gap-1.5 rounded-xl border-[3px] border-cosmos bg-white px-4 py-2.5 text-sm font-bold text-crimson transition-all active:scale-95"
                 >
                   <CalendarX className="size-4" strokeWidth={2.5} aria-hidden="true" />
                   Cancelar

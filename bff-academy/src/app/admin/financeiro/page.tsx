@@ -82,7 +82,7 @@ const transactions: ReadonlyArray<Transaction> = [
 const statusStyles: Record<TransactionStatus, { label: string; className: string }> = {
   paid: {
     label: "Pago",
-    className: "border-emerald-700 bg-emerald-100 text-emerald-800",
+    className: "border-marble bg-marble/20 text-cosmos",
   },
   pending: {
     label: "Pendente",
@@ -90,7 +90,7 @@ const statusStyles: Record<TransactionStatus, { label: string; className: string
   },
   overdue: {
     label: "Atrasado",
-    className: "border-[#BE1622] bg-red-50 text-[#BE1622]",
+    className: "border-crimson bg-gochujang/10 text-crimson",
   },
 }
 
@@ -99,8 +99,8 @@ export default function AdminFinancePage() {
     <>
       {/* Cabeçalho */}
       <header>
-        <h1 className="text-3xl font-black text-[#083344]">Controle Financeiro</h1>
-        <p className="mt-1 text-sm font-medium text-[#083344]/60">
+        <h1 className="text-3xl font-black text-cosmos">Controle Financeiro</h1>
+        <p className="mt-1 text-sm font-medium text-cosmos/60">
           Setembro de 2026
         </p>
       </header>
@@ -113,12 +113,12 @@ export default function AdminFinancePage() {
           return (
             <article
               key={card.id}
-              className="flex flex-col gap-2 rounded-2xl border-[3px] border-[#083344] bg-white p-5 shadow-[4px_4px_0_0_#083344]"
+              className="flex flex-col gap-2 rounded-2xl border-[3px] border-cosmos bg-white p-5 shadow-[4px_4px_0_0_var(--color-cosmos)]"
             >
               <div className="flex items-center justify-between">
-                <p className="text-sm font-bold text-[#083344]/70">{card.label}</p>
+                <p className="text-sm font-bold text-cosmos/70">{card.label}</p>
                 <Icon
-                  className={`size-5 ${card.isAlert ? "text-[#BE1622]" : "text-[#083344]"}`}
+                  className={`size-5 ${card.isAlert ? "text-crimson" : "text-cosmos"}`}
                   strokeWidth={2.5}
                   aria-hidden="true"
                 />
@@ -126,13 +126,13 @@ export default function AdminFinancePage() {
 
               <p
                 className={`text-3xl font-black ${
-                  card.isAlert ? "text-[#BE1622]" : "text-[#083344]"
+                  card.isAlert ? "text-crimson" : "text-cosmos"
                 }`}
               >
                 {card.value}
               </p>
 
-              <p className="text-xs font-bold text-[#083344]/60">{card.detail}</p>
+              <p className="text-xs font-bold text-cosmos/60">{card.detail}</p>
             </article>
           )
         })}
@@ -141,19 +141,19 @@ export default function AdminFinancePage() {
       {/* Transações */}
       <section
         aria-labelledby="transactions-title"
-        className="rounded-2xl border-[3px] border-[#083344] bg-white p-6 shadow-[4px_4px_0_0_#083344]"
+        className="rounded-2xl border-[3px] border-cosmos bg-white p-6 shadow-[4px_4px_0_0_var(--color-cosmos)]"
       >
-        <h2 id="transactions-title" className="text-xl font-bold text-[#083344]">
+        <h2 id="transactions-title" className="text-xl font-bold text-cosmos">
           Transações Recentes
         </h2>
 
         <table className="mt-5 w-full border-collapse text-left">
           <thead>
-            <tr className="border-b-2 border-[#083344]">
-              <th className="pb-3 text-sm font-black text-[#083344]">Data</th>
-              <th className="pb-3 text-sm font-black text-[#083344]">Descrição</th>
-              <th className="pb-3 text-right text-sm font-black text-[#083344]">Valor</th>
-              <th className="pb-3 text-right text-sm font-black text-[#083344]">Status</th>
+            <tr className="border-b-2 border-cosmos">
+              <th className="pb-3 text-sm font-black text-cosmos">Data</th>
+              <th className="pb-3 text-sm font-black text-cosmos">Descrição</th>
+              <th className="pb-3 text-right text-sm font-black text-cosmos">Valor</th>
+              <th className="pb-3 text-right text-sm font-black text-cosmos">Status</th>
             </tr>
           </thead>
 
@@ -162,14 +162,14 @@ export default function AdminFinancePage() {
               const status = statusStyles[transaction.status]
 
               return (
-                <tr key={transaction.id} className="border-b-2 border-[#083344]/10">
-                  <td className="py-4 text-sm font-medium text-[#083344]/70">
+                <tr key={transaction.id} className="border-b-2 border-cosmos/10">
+                  <td className="py-4 text-sm font-medium text-cosmos/70">
                     {transaction.date}
                   </td>
-                  <td className="py-4 font-bold text-[#083344]">
+                  <td className="py-4 font-bold text-cosmos">
                     {transaction.description}
                   </td>
-                  <td className="py-4 text-right font-black text-[#083344]">
+                  <td className="py-4 text-right font-black text-cosmos">
                     {transaction.amount}
                   </td>
                   <td className="py-4 text-right">

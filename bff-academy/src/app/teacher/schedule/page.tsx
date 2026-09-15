@@ -59,9 +59,9 @@ const opportunities = [
 ]
 
 const badgeStyles: Record<string, string> = {
-  yellow: "border-[#083344] bg-[#F59E0B] text-[#083344]",
-  green: "border-[#083344] bg-[#10B981] text-white",
-  red: "border-[#083344] bg-[#BE1622] text-white",
+  yellow: "border-cosmos bg-varden text-cosmos",
+  green: "border-cosmos bg-marble text-varden",
+  red: "border-cosmos bg-crimson text-white",
 }
 
 export default function TeacherSchedulePage() {
@@ -83,21 +83,21 @@ export default function TeacherSchedulePage() {
   }
 
   return (
-    <main className="min-h-screen bg-[#FDF6E3] p-4 sm:p-6 lg:p-8">
+    <main className="min-h-screen bg-varden p-4 sm:p-6 lg:p-8">
       <div className="mx-auto flex max-w-6xl flex-col gap-6">
         <header className="flex items-start gap-3">
           <button
             type="button"
             onClick={() => router.push("/teacher")}
             aria-label="Voltar ao painel"
-            className="mt-0.5 grid size-11 shrink-0 place-items-center rounded-xl border-[3px] border-[#083344] bg-white text-[#083344] shadow-[2px_2px_0_0_#083344] transition-all active:translate-y-0.5 active:shadow-none"
+            className="mt-0.5 grid size-11 shrink-0 place-items-center rounded-xl border-[3px] border-cosmos bg-white text-cosmos shadow-[2px_2px_0_0_var(--color-cosmos)] transition-all active:translate-y-0.5 active:shadow-none"
           >
             <ArrowLeft className="size-5" strokeWidth={2.5} aria-hidden="true" />
           </button>
 
           <div className="min-w-0">
-            <p className="text-sm font-bold text-[#083344]/60">Teacher Marina</p>
-            <h1 className="text-2xl font-black leading-tight text-[#083344] sm:text-3xl">
+            <p className="text-sm font-bold text-cosmos/60">Teacher Marina</p>
+            <h1 className="text-2xl font-black leading-tight text-cosmos sm:text-3xl">
               Agenda e Oportunidades
             </h1>
           </div>
@@ -106,17 +106,17 @@ export default function TeacherSchedulePage() {
         <div className="flex flex-col gap-6 lg:grid lg:grid-cols-12">
           <section
             aria-labelledby="availability-title"
-            className="rounded-2xl border-[3px] border-[#083344] bg-white p-4 shadow-[4px_4px_0_0_#083344] sm:p-6 lg:col-span-7"
+            className="rounded-2xl border-[3px] border-cosmos bg-white p-4 shadow-[4px_4px_0_0_var(--color-cosmos)] sm:p-6 lg:col-span-7"
           >
             <header className="mb-5 flex items-start gap-3">
-              <span className="grid size-10 shrink-0 place-items-center rounded-xl border-[3px] border-[#083344] bg-[#FDF6E3]">
-                <Clock className="size-5 text-[#083344]" strokeWidth={2.5} aria-hidden="true" />
+              <span className="grid size-10 shrink-0 place-items-center rounded-xl border-[3px] border-cosmos bg-varden">
+                <Clock className="size-5 text-cosmos" strokeWidth={2.5} aria-hidden="true" />
               </span>
               <div className="min-w-0">
-                <h2 id="availability-title" className="text-lg font-black text-[#083344] sm:text-xl">
+                <h2 id="availability-title" className="text-lg font-black text-cosmos sm:text-xl">
                   Meus Horários Livres
                 </h2>
-                <p className="text-sm font-bold text-[#083344]/60">
+                <p className="text-sm font-bold text-cosmos/60">
                   Toque para marcar ou desmarcar disponibilidade na semana
                 </p>
               </div>
@@ -129,9 +129,9 @@ export default function TeacherSchedulePage() {
                 return (
                   <div
                     key={dayName}
-                    className="flex flex-col gap-2 border-b-2 border-[#083344]/10 pb-4 last:border-b-0 last:pb-0"
+                    className="flex flex-col gap-2 border-b-2 border-cosmos/10 pb-4 last:border-b-0 last:pb-0"
                   >
-                    <p className="text-sm font-black text-[#083344]">{dayName}</p>
+                    <p className="text-sm font-black text-cosmos">{dayName}</p>
                     <div className="grid grid-cols-3 gap-2 sm:grid-cols-5">
                       {TIME_SLOTS.map((time) => {
                         const slotKey: SlotKey = `${short}-${time}`
@@ -144,10 +144,10 @@ export default function TeacherSchedulePage() {
                             onClick={() => toggleSlot(slotKey)}
                             aria-pressed={isFree}
                             aria-label={`${dayName} ${time}, ${isFree ? "livre" : "indisponível"}`}
-                            className={`rounded-full border-2 border-[#083344] px-2 py-2 text-xs font-black transition-all active:scale-95 sm:text-sm ${
+                            className={`rounded-full border-2 border-cosmos px-2 py-2 text-xs font-black transition-all active:scale-95 sm:text-sm ${
                               isFree
-                                ? "bg-[#10B981] text-white shadow-[2px_2px_0_0_#083344]"
-                                : "bg-[#FDF6E3] text-[#083344]/50"
+                                ? "bg-marble text-white shadow-[2px_2px_0_0_var(--color-cosmos)]"
+                                : "bg-varden text-cosmos/50"
                             }`}
                           >
                             {time}
@@ -166,10 +166,10 @@ export default function TeacherSchedulePage() {
             className="flex flex-col gap-4 lg:col-span-5"
           >
             <header className="flex items-center gap-3">
-              <span className="grid size-10 shrink-0 place-items-center rounded-xl border-[3px] border-[#083344] bg-[#BE1622] shadow-[2px_2px_0_0_#083344]">
+              <span className="grid size-10 shrink-0 place-items-center rounded-xl border-[3px] border-cosmos bg-crimson shadow-[2px_2px_0_0_var(--color-cosmos)]">
                 <Flame className="size-5 text-white" strokeWidth={2.5} aria-hidden="true" />
               </span>
-              <h2 id="opportunities-title" className="text-lg font-black text-[#083344] sm:text-xl">
+              <h2 id="opportunities-title" className="text-lg font-black text-cosmos sm:text-xl">
                 Novas Turmas e Reposições
               </h2>
             </header>
@@ -180,10 +180,10 @@ export default function TeacherSchedulePage() {
               return (
                 <article
                   key={opportunity.id}
-                  className={`flex flex-col gap-3 rounded-2xl border-[3px] p-4 shadow-[4px_4px_0_0_#083344] sm:p-5 ${
+                  className={`flex flex-col gap-3 rounded-2xl border-[3px] p-4 shadow-[4px_4px_0_0_var(--color-cosmos)] sm:p-5 ${
                     isExpress
-                      ? "border-[#BE1622] bg-[#F59E0B]"
-                      : "border-[#083344] bg-white"
+                      ? "border-crimson bg-marble"
+                      : "border-cosmos bg-white"
                   }`}
                 >
                   <div className="flex flex-wrap gap-2">
@@ -198,18 +198,18 @@ export default function TeacherSchedulePage() {
                   </div>
 
                   <div className="min-w-0">
-                    <h3 className="text-base font-black wrap-break-word text-[#083344] sm:text-lg">
+                    <h3 className="text-base font-black wrap-break-word text-cosmos sm:text-lg">
                       {opportunity.title}
                     </h3>
-                    <p className="mt-1 text-sm font-medium wrap-break-word text-[#083344]/70">
+                    <p className="mt-1 text-sm font-medium wrap-break-word text-cosmos/70">
                       {opportunity.detail}
                     </p>
                   </div>
 
                   <button
                     type="button"
-                    className={`mt-1 flex w-full items-center justify-center gap-2 rounded-xl border-[3px] border-[#083344] px-4 py-3 font-black shadow-[3px_3px_0_0_#083344] transition-all active:translate-y-1 active:shadow-none ${
-                      isExpress ? "bg-[#BE1622] text-white" : "bg-[#083344] text-white"
+                    className={`mt-1 flex w-full items-center justify-center gap-2 rounded-xl border-[3px] border-cosmos px-4 py-3 font-black shadow-[3px_3px_0_0_var(--color-cosmos)] transition-all active:translate-y-1 active:shadow-none ${
+                      isExpress ? "bg-crimson text-white" : "bg-cosmos text-white"
                     }`}
                   >
                     {isExpress ? (

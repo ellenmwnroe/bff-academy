@@ -24,6 +24,7 @@ import {
   UserPlus,
   ClipboardCheck,
   User,
+  UserCheck,
   type LucideIcon,
 } from "lucide-react"
 
@@ -154,6 +155,13 @@ const sections: ReadonlyArray<DebugSection> = [
         description: "Página pública para novos docentes",
         icon: UserPlus,
         variant: "crimson",
+      },
+      {
+        href: "/admin/teachers/approvals",
+        label: "Aprovação de Professores",
+        description: "Caixa de entrada da diretoria",
+        icon: UserCheck,
+        variant: "varden",
       },
       {
         href: "/teacher",
