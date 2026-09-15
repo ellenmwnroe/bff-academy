@@ -20,6 +20,7 @@ import {
   FileText,
   LayoutDashboard,
   Bot,
+  GraduationCap,
   type LucideIcon,
 } from "lucide-react"
 
@@ -143,6 +144,13 @@ const sections: ReadonlyArray<DebugSection> = [
         description: "Painel de KPIs e gestão (desktop)",
         icon: LayoutDashboard,
         variant: "crimson",
+      },
+      {
+        href: "/teacher",
+        label: "Painel do Professor",
+        description: "Agenda, próxima aula e alunos",
+        icon: GraduationCap,
+        variant: "varden",
       },
       {
         href: "/class-details",

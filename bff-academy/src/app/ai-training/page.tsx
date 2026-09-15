@@ -137,7 +137,7 @@ export default function AiTrainingPage() {
               aria-hidden="true"
             />
             <p className="text-sm font-black text-[#083344]">
-              ⚡ Energia: {energy}/{MAX_ENERGY}
+               Energia: {energy}/{MAX_ENERGY}
             </p>
           </div>
 

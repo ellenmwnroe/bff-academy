@@ -1,6 +1,7 @@
 "use client"
 
 import { Clock } from "lucide-react"
+import Link from "next/link"
 import { useEffect, useRef, useState } from "react"
 
 type ClassVariant = "marble" | "crimson" | "varden"
@@ -102,6 +103,8 @@ export function UpcomingClassesCarousel({
   }
 
   const handlePointerDown = (event: React.PointerEvent<HTMLDivElement>) => {
+    hasDragged.current = false
+
     const track = trackRef.current
     if (!track || event.pointerType === "touch") return
 
@@ -209,13 +212,19 @@ export function UpcomingClassesCarousel({
               </p>
             </div>
 
-            <button
-              type="button"
-              onClick={() => handleJoinClick(classItem.id)}
-              className={`mt-auto rounded-2xl border-[3px] border-b-[6px] px-4 py-3 text-sm font-extrabold transition-all active:translate-y-1 active:border-b-[3px] ${buttonVariants[classItem.variant]}`}
+            <Link
+              href="/class-details"
+              onClick={(event) => {
+                if (hasDragged.current) {
+                  event.preventDefault()
+                  return
+                }
+                handleJoinClick(classItem.id)
+              }}
+              className={`mt-auto rounded-2xl border-[3px] border-b-[6px] px-4 py-3 text-center text-sm font-extrabold transition-all active:translate-y-1 active:border-b-[3px] ${buttonVariants[classItem.variant]}`}
             >
               Entrar na Aula
-            </button>
+            </Link>
           </article>
         ))}
       </div>

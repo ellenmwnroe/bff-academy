@@ -2,6 +2,8 @@
 
 import { useState } from "react"
 import { useRouter } from "next/navigation"
+import Link from "next/link"
+import { Bot } from "lucide-react"
 import { GlobalHeader } from "./global-header"
 import { JourneyHeroCard } from "./journey-hero-card"
 import { DailyMissionsCard } from "./daily-missions-card"
@@ -42,7 +44,17 @@ export function HomeView() {
       </div>
 
       {/* Fora do padding lateral para o carrossel sangrar até a borda da tela */}
-      <UpcomingClassesCarousel />
+      <UpcomingClassesCarousel onJoinClass={() => router.push("/class-details")} />
+
+      {/* FAB do Simulador de IA */}
+      <Link
+        href="/ai-training"
+        className="fixed bottom-24 right-4 z-40 grid size-14 place-items-center rounded-full border-[3px] border-cosmos bg-crimson text-varden shadow-[4px_4px_0_0_var(--color-cosmos)] transition-all hover:-translate-y-0.5 hover:shadow-[4px_5px_0_0_var(--color-cosmos)] active:translate-y-0.5 active:shadow-none"
+        aria-label="Praticar com IA"
+        title="Simulador de Conversa"
+      >
+        <Bot className="size-6" strokeWidth={2.5} aria-hidden="true" />
+      </Link>
 
       <StreakWarningModal
         isOpen={isStreakWarningOpen}
