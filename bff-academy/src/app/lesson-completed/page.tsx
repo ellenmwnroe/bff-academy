@@ -1,17 +1,14 @@
 "use client"
 
 import { useRouter } from "next/navigation"
-import { LessonCompletedView } from "../../components/lesson-completed-view"
+import { PostActivityModal } from "../../components/gamification/PostActivityModal"
 
 export default function LessonCompletedPage() {
   const router = useRouter()
 
   return (
-    <LessonCompletedView
-      xpGained={75}
-      accuracy={92}
-      timeSpent="5:45"
-      onContinue={() => router.push("/home")}
-    />
+    <main className="min-h-screen bg-varden">
+      <PostActivityModal isOpen onContinue={() => router.push("/home")} />
+    </main>
   )
 }

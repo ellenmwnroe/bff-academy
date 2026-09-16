@@ -132,7 +132,7 @@ const sections: ReadonlyArray<DebugSection> = [
       {
         href: "/lesson-completed",
         label: "5. Aula Concluída",
-        description: "Vitória e recompensas",
+        description: "Conquistas e compartilhamento",
         icon: Trophy,
         variant: "marble",
       },

@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState, type PointerEvent } from "react"
 import { useRouter } from "next/navigation"
 import { ArrowLeft, Bot, Mic, Send, Zap } from "lucide-react"
+import { PostActivityModal } from "../../components/gamification/PostActivityModal"
 
 type ChatLevel = "iniciante" | "avancado"
 
@@ -47,14 +48,26 @@ export default function AiTrainingPage() {
   const [messages, setMessages] = useState(initialMessages)
   const [draft, setDraft] = useState("")
   const [isRecording, setIsRecording] = useState(false)
+  const [showReward, setShowReward] = useState(false)
   const chatRef = useRef<HTMLDivElement>(null)
   const replyIndex = useRef(0)
+  const didCelebrate = useRef(false)
 
   useEffect(() => {
     const chat = chatRef.current
     if (!chat) return
     chat.scrollTop = chat.scrollHeight
   }, [messages])
+
+  useEffect(() => {
+    if (energy > 0 || didCelebrate.current) {
+      return
+    }
+
+    didCelebrate.current = true
+    const timeoutId = window.setTimeout(() => setShowReward(true), 700)
+    return () => window.clearTimeout(timeoutId)
+  }, [energy])
 
   const sendMessage = (text: string) => {
     const trimmed = text.trim()
@@ -277,6 +290,15 @@ export default function AiTrainingPage() {
           </p>
         </div>
       )}
+
+      <PostActivityModal
+        isOpen={showReward}
+        subtitle="Você mandou muito bem na pronúncia hoje."
+        onContinue={() => {
+          setShowReward(false)
+          router.push("/home")
+        }}
+      />
     </main>
   )
 }
