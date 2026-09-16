@@ -1,7 +1,8 @@
 "use client"
 
 import { useState } from "react"
-import { X, Heart, Volume2, Check } from "lucide-react"
+import { X, Volume2, Check } from "lucide-react"
+import { EnergyCard } from "../layout/StudentHeader"
 
 type Answer = {
   readonly id: string
@@ -70,11 +71,7 @@ export function MultipleChoiceView({
             <X className="size-5 text-cosmos" strokeWidth={3} aria-hidden="true" />
           </button>
 
-          {/* Lives Counter */}
-          <div className="flex items-center gap-2 rounded-full border-[3px] border-cosmos bg-card px-3 py-1.5 shadow-[3px_3px_0_0_var(--color-cosmos)]">
-            <Heart className="size-5 fill-crimson text-crimson" strokeWidth={2.5} aria-hidden="true" />
-            <span className="font-serif text-lg font-bold text-cosmos">{lives}</span>
-          </div>
+          <EnergyCard energy={lives} />
         </div>
 
         {/* Progress Bar */}

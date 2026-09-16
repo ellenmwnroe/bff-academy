@@ -1,6 +1,7 @@
 "use client"
 
-import { ArrowLeft, Play, Clock, Zap, Heart, BookOpen, MessageCircle, Mic } from "lucide-react"
+import { ArrowLeft, Play, Clock, Zap, BookOpen, MessageCircle, Mic } from "lucide-react"
+import { EnergyCard } from "./layout/StudentHeader"
 
 type LessonObjective = {
   readonly title: string
@@ -59,8 +60,7 @@ export function LessonOverviewView({
           </span>
         </div>
 
-        {/* Spacer to balance layout */}
-        <div className="size-12" />
+        <EnergyCard energy={5} />
       </header>
 
       {/* Main Content */}
@@ -94,11 +94,11 @@ export function LessonOverviewView({
                 </span>
               </div>
 
-              {/* Lives */}
+              {/* Energia */}
               <div className="flex flex-col items-center gap-2 rounded-2xl border-[3px] border-cosmos bg-varden p-3 shadow-[3px_3px_0_0_var(--color-cosmos)]">
-                <Heart className="size-6 fill-crimson text-crimson" strokeWidth={2.5} aria-hidden="true" />
+                <Zap className="size-6 fill-yellow-500 text-yellow-500" strokeWidth={2.5} aria-hidden="true" />
                 <span className="text-center text-xs font-bold text-cosmos">
-                  5 vidas
+                  5/5
                 </span>
               </div>
             </div>

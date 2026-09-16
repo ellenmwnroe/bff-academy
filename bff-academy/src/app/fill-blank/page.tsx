@@ -20,7 +20,7 @@ export default function FillInTheBlankPage() {
       correctAnswer={sampleExercise.correctAnswer}
       wordBank={sampleExercise.wordBank}
       progress={60}
-      lives={4}
+      lives={5}
       onClose={() => router.push("/home")}
       onContinue={() => router.push("/speaking")}
     />

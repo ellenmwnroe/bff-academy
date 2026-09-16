@@ -4,7 +4,7 @@ import { useState } from "react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
 import { Bot } from "lucide-react"
-import { GlobalHeader } from "./global-header"
+import { StudentHeader } from "./layout/StudentHeader"
 import { JourneyHeroCard } from "./journey-hero-card"
 import { DailyMissionsCard } from "./daily-missions-card"
 import { UpcomingClassesCarousel } from "./upcoming-classes-carousel"
@@ -18,12 +18,7 @@ export function HomeView() {
 
   return (
     <div className="flex flex-col gap-6 pb-8">
-      <GlobalHeader
-        streakCount={STREAK_DAYS}
-        ticketsCount={2}
-        avatarUrl="/mascot.png"
-        onStreakClick={() => setIsStreakWarningOpen(true)}
-      />
+      <StudentHeader />
 
       <div className="flex flex-col gap-6 px-5">
         <h1 className="font-serif text-3xl leading-tight text-cosmos text-balance">

@@ -1,7 +1,8 @@
 "use client"
 
 import { useState, useRef, useEffect } from "react"
-import { X, Heart, Check, Lightbulb } from "lucide-react"
+import { X, Check, Lightbulb } from "lucide-react"
+import { EnergyCard } from "../layout/StudentHeader"
 
 type FillInTheBlankExerciseProps = {
   readonly sentence: string
@@ -71,11 +72,7 @@ export function FillInTheBlankView({
             <X className="size-5 text-cosmos" strokeWidth={3} aria-hidden="true" />
           </button>
 
-          {/* Lives Counter */}
-          <div className="flex items-center gap-2 rounded-full border-[3px] border-cosmos bg-card px-3 py-1.5 shadow-[3px_3px_0_0_var(--color-cosmos)]">
-            <Heart className="size-5 fill-crimson text-crimson" strokeWidth={2.5} aria-hidden="true" />
-            <span className="font-serif text-lg font-bold text-cosmos">{lives}</span>
-          </div>
+          <EnergyCard energy={lives} />
         </div>
 
         {/* Progress Bar */}
