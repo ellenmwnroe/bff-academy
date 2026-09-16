@@ -68,6 +68,15 @@ O sistema de avaliação para transição de níveis (ex: Flex 1 para Flex 2) ad
 * **Recompensas (Sucesso):** Se o aluno concluir com pelo menos 1 Coração restante, visualiza uma tela de conquista exclusiva, o próximo nível é desbloqueado no banco de dados instantaneamente, ganha um bônus massivo de XP, e o Certificado de Conclusão (PDF) é gerado automaticamente.
 * **Fluxo de Reprovação e Recuperação (Prevenção de Churn):** O aluno **não** precisa refazer lições passadas. O botão do "Desafio Flex" é bloqueado e, para habilitar uma nova tentativa, o aluno é direcionado à **Clínica de Revisão**, onde o sistema gera 2 atividades focadas estritamente nas regras que ele errou no teste. Concluindo essa revisão, a prova é liberada novamente.
 
+### 4.8 Clínica de Revisão (Zona Segura e Scaffolding)
+A "Clínica de Revisão" é o ambiente onde o aluno fixa o conteúdo que errou anteriormente, seja para recuperar Energia (⚡) ou para desbloquear uma nova tentativa do Desafio Flex. 
+
+* **Regra da Zona Segura (Safe Zone):** É estritamente proibido descontar vidas (Corações ou Energia) do aluno dentro da Clínica de Revisão. O foco aqui é aprendizado sem punição, evitando o "loop de falha" e o cancelamento da assinatura.
+* **Feedback Progressivo (IA Scaffolding):** Em caso de erros consecutivos na mesma questão durante a revisão, a IA deve atuar com suporte gradual:
+  * **1º Erro (Dica Leve):** A IA fornece um lembrete contextual sem dar a resposta direta (ex: *"Lembre-se de que estamos falando no passado"*).
+  * **2º Erro (Explicação Direta):** A IA explica a regra gramatical de forma clara e objetiva.
+  * **3º Erro (Trava de Segurança e Repetição):** A IA fornece a resposta correta, mas exige que o aluno digite/fale a frase perfeitamente para criar memória muscular antes de avançar para a próxima tela.
+
 ---
 
 ## 5. User Stories

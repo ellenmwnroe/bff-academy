@@ -25,6 +25,7 @@ import {
   ClipboardCheck,
   User,
   UserCheck,
+  Stethoscope,
   type LucideIcon,
 } from "lucide-react"
 
@@ -135,6 +136,13 @@ const sections: ReadonlyArray<DebugSection> = [
         description: "Conquistas e compartilhamento",
         icon: Trophy,
         variant: "marble",
+      },
+      {
+        href: "/error-clinic",
+        label: "6. Clínica de Erros",
+        description: "Revisão obrigatória antes do próximo módulo",
+        icon: Stethoscope,
+        variant: "crimson",
       },
     ],
   },
