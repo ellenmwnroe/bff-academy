@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState } from "react"
 import Link from "next/link"
 import { ChevronLeft, ChevronRight, Clock, Ticket, CalendarX } from "lucide-react"
 import { BottomNav } from "../../components/bottom-nav"
-import { CancelClassModal } from "../../components/cancel-class-modal"
+import { CancelLessonModal } from "../../components/modals/CancelLessonModal"
 import { RescheduleClassModal } from "../../components/reschedule-class-modal"
 import {
   fetchMakeupSlots,
@@ -372,11 +372,8 @@ export default function CalendarPage() {
         )}
       </section>
 
-      <CancelClassModal
+      <CancelLessonModal
         isOpen={classToCancel !== null}
-        lessonTitle={classToCancel?.title}
-        lessonTime={classToCancel?.timeRange}
-        hoursUntilClass={classToCancel?.hoursUntilClass}
         onClose={() => setClassToCancel(null)}
         onConfirm={confirmCancel}
       />
